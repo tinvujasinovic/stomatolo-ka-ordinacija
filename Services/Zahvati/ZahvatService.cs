@@ -9,24 +9,24 @@ namespace Services.Zahvati
 
         public ZahvatService(){}
 
-        public void DeleteZahvat(int id)
+        public bool DeleteZahvat(int id)
         {
-            throw new System.NotImplementedException();
+            return db.DeleteZahvat(id);
         }
 
         public List<Zahvat> GetAllZahvat()
         {
-            throw new System.NotImplementedException();
+            return db.GetAllZahvat();
         }
 
         public Zahvat GetZahvat(int id)
         {
-            throw new System.NotImplementedException();
+            return db.GetZahvat(id);
         }
 
-        public void SaveZahvat(Zahvat zahvat)
+        public bool SaveZahvat(Zahvat zahvat)
         {
-            db.SaveZahvat(zahvat);
+            return db.SaveZahvat(zahvat);
         }
     }
 }

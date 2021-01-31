@@ -1,7 +1,7 @@
 ﻿
 namespace stomatoloska_ordinacija.Administracija
 {
-    partial class KreiranjeZahvata
+    partial class ManageZahvata
     {
         /// <summary>
         /// Required designer variable.
@@ -74,6 +74,8 @@ namespace stomatoloska_ordinacija.Administracija
             // 
             // inputTrajanje
             // 
+            this.inputTrajanje.AllowDrop = true;
+            this.inputTrajanje.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.inputTrajanje.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.inputTrajanje.FormattingEnabled = true;
             this.inputTrajanje.Location = new System.Drawing.Point(12, 231);
@@ -97,6 +99,7 @@ namespace stomatoloska_ordinacija.Administracija
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.LimeGreen;
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.button1.Location = new System.Drawing.Point(229, 329);
@@ -119,6 +122,7 @@ namespace stomatoloska_ordinacija.Administracija
             // 
             // inputCijena
             // 
+            this.inputCijena.DecimalPlaces = 2;
             this.inputCijena.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.inputCijena.Location = new System.Drawing.Point(12, 167);
             this.inputCijena.Name = "inputCijena";
@@ -173,14 +177,14 @@ namespace stomatoloska_ordinacija.Administracija
             this.label1.TabIndex = 0;
             this.label1.Text = "Naziv";
             // 
-            // KreiranjeZahvata
+            // ManageZahvata
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(383, 450);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.title);
-            this.Name = "KreiranjeZahvata";
+            this.Name = "ManageZahvata";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Novi zahvat";
             this.panel1.ResumeLayout(false);

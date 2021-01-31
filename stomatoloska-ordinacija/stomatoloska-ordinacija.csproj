@@ -63,11 +63,11 @@
     <Compile Include="KreiranjeNarudžbe.Designer.cs">
       <DependentUpon>KreiranjeNarudžbe.cs</DependentUpon>
     </Compile>
-    <Compile Include="Administracija\KreiranjeZahvata.cs">
+    <Compile Include="Administracija\ManageZahvata.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Administracija\KreiranjeZahvata.Designer.cs">
-      <DependentUpon>KreiranjeZahvata.cs</DependentUpon>
+    <Compile Include="Administracija\ManageZahvata.Designer.cs">
+      <DependentUpon>ManageZahvata.cs</DependentUpon>
     </Compile>
     <Compile Include="Početna.cs">
       <SubType>Form</SubType>
@@ -77,8 +77,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Administracija\KreiranjeZahvata.resx">
-      <DependentUpon>KreiranjeZahvata.cs</DependentUpon>
+    <EmbeddedResource Include="Administracija\ManageZahvata.resx">
+      <DependentUpon>ManageZahvata.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Administracija\PregledZahvata.resx">
       <DependentUpon>PregledZahvata.cs</DependentUpon>

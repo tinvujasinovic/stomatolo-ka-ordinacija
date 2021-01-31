@@ -12,5 +12,10 @@
             Naziv = naziv;
             TrajanjeUMin = trajanje;
         }
+
+        public Trajanje(int id)
+        {
+            Id = id;
+        }
     }
 }

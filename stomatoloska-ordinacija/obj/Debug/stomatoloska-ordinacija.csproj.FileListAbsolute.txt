@@ -17,4 +17,4 @@ C:\Users\Tin\Desktop\Tin\Posao\stomatoloska-ordinacija\stomatoloska-ordinacija\o
 C:\Users\Tin\Desktop\Tin\Posao\stomatoloska-ordinacija\stomatoloska-ordinacija\obj\Debug\stomatoloska_ordinacija.Administracija.PregledZahvata.resources
 C:\Users\Tin\Desktop\Tin\Posao\stomatoloska-ordinacija\stomatoloska-ordinacija\bin\Debug\System.Data.SqlClient.dll
 C:\Users\Tin\Desktop\Tin\Posao\stomatoloska-ordinacija\stomatoloska-ordinacija\bin\Debug\System.Data.SqlClient.xml
-C:\Users\Tin\Desktop\Tin\Posao\stomatoloska-ordinacija\stomatoloska-ordinacija\obj\Debug\stomatoloska_ordinacija.Administracija.KreiranjeZahvata.resources
+C:\Users\Tin\Desktop\Tin\Posao\stomatoloska-ordinacija\stomatoloska-ordinacija\obj\Debug\stomatoloska_ordinacija.Administracija.ManageZahvata.resources

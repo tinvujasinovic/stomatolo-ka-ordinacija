@@ -3,6 +3,8 @@ using Services.Zahvati;
 using Services.Trajanja;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
+using System;
 
 namespace Services
 {
@@ -21,49 +23,173 @@ namespace Services
             return instance;
         }
 
-        public void SaveZahvat(Zahvat model)
-        {
-            connection.Open();
-            var cmd = new SqlCommand($@"INSERT INTO dbo.Zahvat VALUES 
-                {model.Šifra},
-                {model.Naziv},
-                {model.Cijena},
-                {model.Trajanje.Id}");
+        #region Zahvat
 
-            cmd.ExecuteNonQuery();
-            connection.Close();
+        public bool SaveZahvat(Zahvat model)
+        {
+            try
+            {
+                if(model.Id > 0)
+                {
+
+                    connection.Open();
+                    var cmd = ExecuteQuery($"UPDATE dbo.Zahvat SET Naziv = '{model.Naziv}', Sifra = '{model.Šifra}', Cijena = '{model.Cijena.ToString().Replace(',', '.')}', TrajanjeId = {model.Trajanje.Id} WHERE Id = {model.Id}");
+
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+
+                    return true;
+                }
+                else
+                {
+                    connection.Open();
+                    var cmd = ExecuteQuery($"INSERT INTO dbo.Zahvat ([Sifra], [Naziv], [Cijena], [TrajanjeId]) VALUES ('{model.Šifra}', '{model.Naziv}', '{model.Cijena.ToString().Replace(',', '.')}', {model.Trajanje.Id})");
+
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+
+                    return true;
+                }
+
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
         }
 
         public Zahvat GetZahvat(int id)
         {
-            throw new System.NotImplementedException();
+            try {
+                var zahvat = new Zahvat();
+                connection.Open();
+
+                var cmd = ExecuteQuery($@"SELECT * FROM [dbo].Zahvat WHERE Active = 1 AND Id = {id}");
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    zahvat = new Zahvat((int)reader.GetValue(0), (string)reader.GetValue(2), (string)reader.GetValue(3), (decimal)reader.GetValue(4), new Trajanje((int)reader.GetValue(5)));
+                }
+                reader.Close();
+
+                cmd = ExecuteQuery($@"SELECT * FROM [dbo].Trajanje WHERE Id = {zahvat.Trajanje.Id}");
+
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    zahvat.Trajanje.Naziv = (string)reader.GetValue(2);
+                    zahvat.Trajanje.TrajanjeUMin = (int)reader.GetValue(3);
+                }
+                reader.Close();
+
+                connection.Close();
+                return zahvat;
+            }
+            catch(Exception e)
+            {
+                return null;
+            }   
         }
 
         public List<Zahvat> GetAllZahvat()
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                var lista = new List<Zahvat>();
+                connection.Open();
+
+                var cmd = ExecuteQuery($@"SELECT * FROM [dbo].Zahvat WHERE Active = 1");
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    lista.Add(new Zahvat((int)reader.GetValue(0), (string)reader.GetValue(2), (string)reader.GetValue(3), (decimal)reader.GetValue(4), new Trajanje((int)reader.GetValue(5))));
+                }
+                reader.Close();
+
+                foreach (var item in lista)
+                {
+
+                    cmd = ExecuteQuery($@"SELECT * FROM [dbo].Trajanje WHERE Id = {item.Trajanje.Id}");
+
+                    reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        item.Trajanje.Naziv = (string)reader.GetValue(2);
+                        item.Trajanje.TrajanjeUMin = (int)reader.GetValue(3);
+                    }
+                    reader.Close();
+                }
+
+                connection.Close();
+                return lista;
+            }
+            catch(Exception e)
+            {
+                return null;
+            }
+         
         }
 
-        public void DeleteZahvat(int id)
+        public bool DeleteZahvat(int id)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                connection.Open();
+                var cmd = ExecuteQuery($"UPDATE [dbo].Zahvat SET Active = 0 WHERE Id = {id}");
+                cmd.ExecuteNonQuery();
+                connection.Close();
+
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
         }
+
+        #endregion
+
+        #region Trajanje
 
         public List<Trajanje> GetAllTrajanja()
         {
-            var lista = new List<Trajanje>();
-            connection.Open();
-            var cmd = new SqlCommand($@"SELECT * FROM [dbo].Trajanje", connection);
-
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            while (reader.Read())
+            try
             {
-                lista.Add(new Trajanje((int)reader.GetValue(0), (string)reader.GetValue(1), (int)reader.GetValue(2)));
-            }
+                var lista = new List<Trajanje>();
+                connection.Open();
 
-            connection.Close();
-            return null;
+                var cmd = ExecuteQuery($@"SELECT * FROM [dbo].Trajanje");
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    lista.Add(new Trajanje((int)reader.GetValue(0), (string)reader.GetValue(2), (int)reader.GetValue(3)));
+                }
+
+                connection.Close();
+                return lista;
+            }
+            catch(Exception e)
+            {
+                return null;
+            }
+          
+        }
+
+        #endregion
+
+
+
+        private SqlCommand ExecuteQuery(string cmd)
+        {
+            return new SqlCommand(cmd, connection);
         }
     }
 }

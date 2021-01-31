@@ -5,9 +5,9 @@ namespace Services.Zahvati
 {
     public interface IZahvatService
     {
-        void SaveZahvat(Zahvat zahvat);
+        bool SaveZahvat(Zahvat zahvat);
         Zahvat GetZahvat(int id);
         List<Zahvat> GetAllZahvat();
-        void DeleteZahvat(int id);
+        bool DeleteZahvat(int id);
     }
 }
