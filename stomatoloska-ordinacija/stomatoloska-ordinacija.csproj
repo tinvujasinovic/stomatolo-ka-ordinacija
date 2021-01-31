@@ -35,6 +35,11 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Data.SqlClient.4.8.2\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,14 +51,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Administracija\PregledZahvata.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Administracija\PregledZahvata.Designer.cs">
+      <DependentUpon>PregledZahvata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KreiranjeNarudžbe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KreiranjeNarudžbe.Designer.cs">
+      <DependentUpon>KreiranjeNarudžbe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Administracija\KreiranjeZahvata.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Administracija\KreiranjeZahvata.Designer.cs">
+      <DependentUpon>KreiranjeZahvata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Početna.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Početna.Designer.cs">
+      <DependentUpon>Početna.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Administracija\KreiranjeZahvata.resx">
+      <DependentUpon>KreiranjeZahvata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Administracija\PregledZahvata.resx">
+      <DependentUpon>PregledZahvata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KreiranjeNarudžbe.resx">
+      <DependentUpon>KreiranjeNarudžbe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Početna.resx">
+      <DependentUpon>Početna.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -63,6 +98,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -75,6 +111,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App\" />
+    <Folder Include="Dashboard\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{1c8a476b-3731-4fcc-aa63-ae8797d14611}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{3ca92e36-3f2d-4a84-a243-ee4ac441c170}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

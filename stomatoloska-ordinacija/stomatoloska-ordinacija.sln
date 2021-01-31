@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "stomatoloska-ordinacija", "stomatoloska-ordinacija.csproj", "{0897DBFE-B736-438F-9069-2ECFDE64C5E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "..\Services\Services.csproj", "{3CA92E36-3F2D-4A84-A243-EE4AC441C170}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "..\Model\Model.csproj", "{1C8A476B-3731-4FCC-AA63-AE8797D14611}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{0897DBFE-B736-438F-9069-2ECFDE64C5E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0897DBFE-B736-438F-9069-2ECFDE64C5E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0897DBFE-B736-438F-9069-2ECFDE64C5E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CA92E36-3F2D-4A84-A243-EE4AC441C170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CA92E36-3F2D-4A84-A243-EE4AC441C170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CA92E36-3F2D-4A84-A243-EE4AC441C170}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CA92E36-3F2D-4A84-A243-EE4AC441C170}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C8A476B-3731-4FCC-AA63-AE8797D14611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C8A476B-3731-4FCC-AA63-AE8797D14611}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C8A476B-3731-4FCC-AA63-AE8797D14611}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C8A476B-3731-4FCC-AA63-AE8797D14611}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
