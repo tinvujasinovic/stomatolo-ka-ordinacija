@@ -1,7 +1,7 @@
 ﻿
-namespace stomatoloska_ordinacija.Administracija
+namespace stomatoloska_ordinacija.Administracija.Zahvati
 {
-    partial class PregledZahvata
+    partial class PregledZahvati
     {
         /// <summary>
         /// Required designer variable.

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Services.Trajanja
 {
-    public class TrajanjeService : ITrajanjeService
+    public class TrajanjeService : ITrajanjeServiceService
     {
         private DbService db = DbService.GetInstance();
 

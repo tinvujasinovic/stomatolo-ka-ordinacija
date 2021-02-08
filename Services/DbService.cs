@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System;
+using Services.RadnoVrijeme;
 
 namespace Services
 {
-    public class DbService : IZahvatService, ITrajanjeService
+    public class DbService : IZahvatService, ITrajanjeServiceService, IRadnoVrijemeService
     {
         private static DbService instance = new DbService();
         private SqlConnection connection { get; set; }
@@ -54,6 +55,7 @@ namespace Services
             }
             catch(Exception e)
             {
+                connection.Close();
                 return false;
             }
         }
@@ -90,6 +92,7 @@ namespace Services
             }
             catch(Exception e)
             {
+                connection.Close();
                 return null;
             }   
         }
@@ -131,6 +134,7 @@ namespace Services
             }
             catch(Exception e)
             {
+                connection.Close();
                 return null;
             }
          
@@ -149,6 +153,7 @@ namespace Services
             }
             catch(Exception e)
             {
+                connection.Close();
                 return false;
             }
         }
@@ -178,6 +183,7 @@ namespace Services
             }
             catch(Exception e)
             {
+                connection.Close();
                 return null;
             }
           
@@ -185,11 +191,72 @@ namespace Services
 
         #endregion
 
+        #region Radno vrijeme
 
+        public Model.RadnoVrijeme GetRadnoVrijeme()
+        {
+            try
+            {
+                var radno = new Model.RadnoVrijeme();
+                connection.Open();
+                    
+                var cmd = ExecuteQuery($@"SELECT * FROM dbo.RadnoVrijeme WHERE Id = 1");
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    radno = new Model.RadnoVrijeme((DateTime)reader.GetValue(1), (DateTime)reader.GetValue(2));
+                    
+                    reader.Close();
+                    connection.Close();
+                    return radno;
+                }
+
+                reader.Close();
+                connection.Close();
+
+                return null;
+            }
+            catch (Exception e)
+            {
+                connection.Close();
+                return null;
+            }
+        }
+
+        public bool SaveRadnoVrijeme(Model.RadnoVrijeme model)
+        {
+            try
+            {
+                connection.Open();
+                var cmd = ExecuteQuery($"UPDATE dbo.RadnoVrijeme SET Pocetak = '{FormatDate(model.Pocetak)}', Kraj = '{FormatDate(model.Kraj)}' WHERE Id = 1");
+
+                cmd.ExecuteNonQuery();
+                connection.Close();
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                connection.Close();
+                return false;
+            }
+        }
+
+        #endregion
 
         private SqlCommand ExecuteQuery(string cmd)
         {
             return new SqlCommand(cmd, connection);
         }
+
+        private string FormatDate(DateTime date)
+        {
+            string dateString = $"{date.Year}-{date.Month}-{date.Day} {date.Hour}:{date.Minute}:{date.Second}.{date.Millisecond}";
+
+            return dateString;
+        }
+
     }
 }

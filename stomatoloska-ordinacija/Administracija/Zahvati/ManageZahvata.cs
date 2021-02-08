@@ -4,7 +4,7 @@ using Services;
 using System.Windows.Forms;
 using System.Collections.Generic;
 
-namespace stomatoloska_ordinacija.Administracija
+namespace stomatoloska_ordinacija.Administracija.Zahvati
 {
     public partial class ManageZahvata : Form
     {

@@ -6,14 +6,14 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Linq;
 
-namespace stomatoloska_ordinacija.Administracija
+namespace stomatoloska_ordinacija.Administracija.Zahvati
 {
-    public partial class PregledZahvata : Form
+    public partial class PregledZahvati : Form
     {
         private List<Zahvat> zahvati = new List<Zahvat>();
         private ZahvatService service = new ZahvatService();
 
-        public PregledZahvata()
+        public PregledZahvati()
         {
             InitializeComponent();
 

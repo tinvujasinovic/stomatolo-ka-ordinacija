@@ -1,7 +1,7 @@
 ﻿
-namespace stomatoloska_ordinacija
+namespace stomatoloska_ordinacija.App
 {
-    partial class KreiranjeNarudžbe
+    partial class PregledPacijenti
     {
         /// <summary>
         /// Required designer variable.
@@ -29,17 +29,10 @@ namespace stomatoloska_ordinacija
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // KreiranjeNarudžbe
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(492, 450);
-            this.Name = "KreiranjeNarudžbe";
-            this.Text = "KreiranjeNarudžbe";
-            this.ResumeLayout(false);
-
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Text = "PregledPacijenti";
         }
 
         #endregion

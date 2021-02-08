@@ -29,17 +29,9 @@ namespace stomatoloska_ordinacija
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea19 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend19 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea20 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend20 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.izbornikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.narudžbeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.novaNarudžbaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pregledToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rasporedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.izvještajiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iskorišteniTerminiPoZahvatuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,29 +39,26 @@ namespace stomatoloska_ordinacija
             this.neiskorišteniTerminiPoZahvatuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.neiskorištenoVrijemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administracijToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.radnoVrijemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zahvatiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pacijentiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.radnoVrijemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.noviToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.pregledToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.calendar1 = new WindowsFormsCalendar.Calendar();
+            this.monthView1 = new WindowsFormsCalendar.MonthView();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.izbornikToolStripMenuItem,
             this.administracijToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1557, 28);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -80,35 +69,19 @@ namespace stomatoloska_ordinacija
             this.rasporedToolStripMenuItem,
             this.izvještajiToolStripMenuItem});
             this.izbornikToolStripMenuItem.Name = "izbornikToolStripMenuItem";
-            this.izbornikToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.izbornikToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
             this.izbornikToolStripMenuItem.Text = "Izbornik";
             // 
             // narudžbeToolStripMenuItem
             // 
-            this.narudžbeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.novaNarudžbaToolStripMenuItem,
-            this.pregledToolStripMenuItem});
             this.narudžbeToolStripMenuItem.Name = "narudžbeToolStripMenuItem";
-            this.narudžbeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.narudžbeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.narudžbeToolStripMenuItem.Text = "Narudžbe";
-            // 
-            // novaNarudžbaToolStripMenuItem
-            // 
-            this.novaNarudžbaToolStripMenuItem.Name = "novaNarudžbaToolStripMenuItem";
-            this.novaNarudžbaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.novaNarudžbaToolStripMenuItem.Text = "Nova narudžba";
-            this.novaNarudžbaToolStripMenuItem.Click += new System.EventHandler(this.novaNarudžbaToolStripMenuItem_Click);
-            // 
-            // pregledToolStripMenuItem
-            // 
-            this.pregledToolStripMenuItem.Name = "pregledToolStripMenuItem";
-            this.pregledToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.pregledToolStripMenuItem.Text = "Pregled";
             // 
             // rasporedToolStripMenuItem
             // 
             this.rasporedToolStripMenuItem.Name = "rasporedToolStripMenuItem";
-            this.rasporedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rasporedToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.rasporedToolStripMenuItem.Text = "Raspored";
             // 
             // izvještajiToolStripMenuItem
@@ -119,31 +92,31 @@ namespace stomatoloska_ordinacija
             this.neiskorišteniTerminiPoZahvatuToolStripMenuItem,
             this.neiskorištenoVrijemeToolStripMenuItem});
             this.izvještajiToolStripMenuItem.Name = "izvještajiToolStripMenuItem";
-            this.izvještajiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.izvještajiToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.izvještajiToolStripMenuItem.Text = "Izvještaji";
             // 
             // iskorišteniTerminiPoZahvatuToolStripMenuItem
             // 
             this.iskorišteniTerminiPoZahvatuToolStripMenuItem.Name = "iskorišteniTerminiPoZahvatuToolStripMenuItem";
-            this.iskorišteniTerminiPoZahvatuToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.iskorišteniTerminiPoZahvatuToolStripMenuItem.Size = new System.Drawing.Size(305, 26);
             this.iskorišteniTerminiPoZahvatuToolStripMenuItem.Text = "Iskorišteni termini po zahvatu";
             // 
             // iskorišteniTerminiPoDanimaToolStripMenuItem
             // 
             this.iskorišteniTerminiPoDanimaToolStripMenuItem.Name = "iskorišteniTerminiPoDanimaToolStripMenuItem";
-            this.iskorišteniTerminiPoDanimaToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.iskorišteniTerminiPoDanimaToolStripMenuItem.Size = new System.Drawing.Size(305, 26);
             this.iskorišteniTerminiPoDanimaToolStripMenuItem.Text = "Iskorišteni termini po danima";
             // 
             // neiskorišteniTerminiPoZahvatuToolStripMenuItem
             // 
             this.neiskorišteniTerminiPoZahvatuToolStripMenuItem.Name = "neiskorišteniTerminiPoZahvatuToolStripMenuItem";
-            this.neiskorišteniTerminiPoZahvatuToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.neiskorišteniTerminiPoZahvatuToolStripMenuItem.Size = new System.Drawing.Size(305, 26);
             this.neiskorišteniTerminiPoZahvatuToolStripMenuItem.Text = "Neiskorišteni termini po zahvatu";
             // 
             // neiskorištenoVrijemeToolStripMenuItem
             // 
             this.neiskorištenoVrijemeToolStripMenuItem.Name = "neiskorištenoVrijemeToolStripMenuItem";
-            this.neiskorištenoVrijemeToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.neiskorištenoVrijemeToolStripMenuItem.Size = new System.Drawing.Size(305, 26);
             this.neiskorištenoVrijemeToolStripMenuItem.Text = "Neiskorišteno vrijeme";
             // 
             // administracijToolStripMenuItem
@@ -153,105 +126,106 @@ namespace stomatoloska_ordinacija
             this.pacijentiToolStripMenuItem,
             this.radnoVrijemeToolStripMenuItem});
             this.administracijToolStripMenuItem.Name = "administracijToolStripMenuItem";
-            this.administracijToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
+            this.administracijToolStripMenuItem.Size = new System.Drawing.Size(118, 24);
             this.administracijToolStripMenuItem.Text = "Administracija";
-            // 
-            // radnoVrijemeToolStripMenuItem
-            // 
-            this.radnoVrijemeToolStripMenuItem.Name = "radnoVrijemeToolStripMenuItem";
-            this.radnoVrijemeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.radnoVrijemeToolStripMenuItem.Text = "Radno vrijeme";
             // 
             // zahvatiToolStripMenuItem
             // 
             this.zahvatiToolStripMenuItem.Name = "zahvatiToolStripMenuItem";
-            this.zahvatiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zahvatiToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.zahvatiToolStripMenuItem.Text = "Zahvati";
             this.zahvatiToolStripMenuItem.Click += new System.EventHandler(this.zahvatiToolStripMenuItem_Click);
             // 
             // pacijentiToolStripMenuItem
             // 
-            this.pacijentiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.noviToolStripMenuItem1,
-            this.pregledToolStripMenuItem1});
             this.pacijentiToolStripMenuItem.Name = "pacijentiToolStripMenuItem";
-            this.pacijentiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pacijentiToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.pacijentiToolStripMenuItem.Text = "Pacijenti";
+            // 
+            // radnoVrijemeToolStripMenuItem
+            // 
+            this.radnoVrijemeToolStripMenuItem.Name = "radnoVrijemeToolStripMenuItem";
+            this.radnoVrijemeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.radnoVrijemeToolStripMenuItem.Text = "Radno vrijeme";
+            this.radnoVrijemeToolStripMenuItem.Click += new System.EventHandler(this.radnoVrijemeToolStripMenuItem_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(12, 34);
+            this.label1.Location = new System.Drawing.Point(16, 42);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 24);
+            this.label1.Size = new System.Drawing.Size(126, 29);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Dashboard";
+            this.label1.Text = "Narudžbe";
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.chart2);
-            this.panel1.Controls.Add(this.chart1);
-            this.panel1.Location = new System.Drawing.Point(12, 63);
+            this.panel1.Controls.Add(this.calendar1);
+            this.panel1.Controls.Add(this.monthView1);
+            this.panel1.Location = new System.Drawing.Point(16, 78);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(776, 375);
+            this.panel1.Size = new System.Drawing.Size(1525, 817);
             this.panel1.TabIndex = 4;
             // 
-            // chart1
+            // calendar1
             // 
-            chartArea19.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea19);
-            legend19.Name = "Legend1";
-            this.chart1.Legends.Add(legend19);
-            this.chart1.Location = new System.Drawing.Point(429, 32);
-            this.chart1.Name = "chart1";
-            series19.ChartArea = "ChartArea1";
-            series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedColumn100;
-            series19.Legend = "Legend1";
-            series19.Name = "Series1";
-            this.chart1.Series.Add(series19);
-            this.chart1.Size = new System.Drawing.Size(300, 300);
-            this.chart1.TabIndex = 0;
-            this.chart1.Text = "chart1";
+            this.calendar1.AllowItemEdit = false;
+            this.calendar1.AllowItemResize = false;
+            this.calendar1.AllowNew = false;
+            this.calendar1.CalendarTimeFormat = WindowsFormsCalendar.CalendarTimeFormat.TwentyFourHour;
+            this.calendar1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.calendar1.ItemsBackgroundColor = System.Drawing.Color.RoyalBlue;
+            this.calendar1.ItemsFont = null;
+            this.calendar1.ItemsForeColor = System.Drawing.Color.Black;
+            this.calendar1.ItemsTimeFormat = "hh:mm";
+            this.calendar1.Location = new System.Drawing.Point(5, 177);
+            this.calendar1.Margin = new System.Windows.Forms.Padding(4);
+            this.calendar1.Name = "calendar1";
+            this.calendar1.Size = new System.Drawing.Size(1504, 625);
+            this.calendar1.TabIndex = 0;
+            this.calendar1.TabStop = false;
+            this.calendar1.Text = "calendar1";
+            this.calendar1.LoadItems += new WindowsFormsCalendar.Calendar.CalendarLoadEventHandler(this.calendar1_LoadItems);
             // 
-            // chart2
+            // monthView1
             // 
-            chartArea20.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea20);
-            legend20.Name = "Legend1";
-            this.chart2.Legends.Add(legend20);
-            this.chart2.Location = new System.Drawing.Point(44, 32);
-            this.chart2.Name = "chart2";
-            series20.ChartArea = "ChartArea1";
-            series20.Legend = "Legend1";
-            series20.Name = "Series1";
-            this.chart2.Series.Add(series20);
-            this.chart2.Size = new System.Drawing.Size(300, 300);
-            this.chart2.TabIndex = 0;
-            this.chart2.Text = "chart1";
-            // 
-            // noviToolStripMenuItem1
-            // 
-            this.noviToolStripMenuItem1.Name = "noviToolStripMenuItem1";
-            this.noviToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.noviToolStripMenuItem1.Text = "Novi";
-            // 
-            // pregledToolStripMenuItem1
-            // 
-            this.pregledToolStripMenuItem1.Name = "pregledToolStripMenuItem1";
-            this.pregledToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.pregledToolStripMenuItem1.Text = "Pregled";
+            this.monthView1.ArrowsColor = System.Drawing.SystemColors.Window;
+            this.monthView1.ArrowsSelectedColor = System.Drawing.Color.Gold;
+            this.monthView1.DayBackgroundColor = System.Drawing.Color.Empty;
+            this.monthView1.DayGrayedText = System.Drawing.SystemColors.GrayText;
+            this.monthView1.DaySelectedBackgroundColor = System.Drawing.SystemColors.Highlight;
+            this.monthView1.DaySelectedColor = System.Drawing.SystemColors.WindowText;
+            this.monthView1.DaySelectedTextColor = System.Drawing.SystemColors.HighlightText;
+            this.monthView1.FirstDayOfWeek = System.DayOfWeek.Monday;
+            this.monthView1.ItemPadding = new System.Windows.Forms.Padding(2);
+            this.monthView1.Location = new System.Drawing.Point(9, 4);
+            this.monthView1.Margin = new System.Windows.Forms.Padding(4);
+            this.monthView1.MonthTitleColor = System.Drawing.SystemColors.ActiveCaption;
+            this.monthView1.MonthTitleColorInactive = System.Drawing.SystemColors.InactiveCaption;
+            this.monthView1.MonthTitleTextColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.monthView1.MonthTitleTextColorInactive = System.Drawing.SystemColors.InactiveCaptionText;
+            this.monthView1.Name = "monthView1";
+            this.monthView1.SelectionMode = WindowsFormsCalendar.MonthViewSelection.WorkWeek;
+            this.monthView1.Size = new System.Drawing.Size(1500, 174);
+            this.monthView1.TabIndex = 0;
+            this.monthView1.Text = "monthView1";
+            this.monthView1.TodayBorderColor = System.Drawing.Color.Maroon;
+            this.monthView1.SelectionChanged += new System.EventHandler(this.monthView1_SelectionChanged);
             // 
             // Početna
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1557, 910);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Početna";
@@ -260,8 +234,6 @@ namespace stomatoloska_ordinacija
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -274,8 +246,6 @@ namespace stomatoloska_ordinacija
         private System.Windows.Forms.ToolStripMenuItem administracijToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem radnoVrijemeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem narudžbeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem novaNarudžbaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pregledToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rasporedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem izvještajiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iskorišteniTerminiPoZahvatuToolStripMenuItem;
@@ -286,10 +256,8 @@ namespace stomatoloska_ordinacija
         private System.Windows.Forms.ToolStripMenuItem pacijentiToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private System.Windows.Forms.ToolStripMenuItem noviToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem pregledToolStripMenuItem1;
+        private WindowsFormsCalendar.MonthView monthView1;
+        public WindowsFormsCalendar.Calendar calendar1;
     }
 }
 

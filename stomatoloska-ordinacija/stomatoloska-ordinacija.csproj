@@ -49,25 +49,40 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsFormsCalendar, Version=1.1.4610.23063, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\WindowsFormsCalendar.1.1.0\lib\WindowsFormsCalendar.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Administracija\PregledZahvata.cs">
+    <Compile Include="Administracija\RadnoVrijeme\ManageRadnoVrijeme.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Administracija\PregledZahvata.Designer.cs">
-      <DependentUpon>PregledZahvata.cs</DependentUpon>
+    <Compile Include="Administracija\RadnoVrijeme\ManageRadnoVrijeme.Designer.cs">
+      <DependentUpon>ManageRadnoVrijeme.cs</DependentUpon>
     </Compile>
-    <Compile Include="KreiranjeNarudžbe.cs">
+    <Compile Include="Administracija\Zahvati\PregledZahvati.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KreiranjeNarudžbe.Designer.cs">
+    <Compile Include="Administracija\Zahvati\PregledZahvati.Designer.cs">
+      <DependentUpon>PregledZahvati.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\KreiranjeNarudžbe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\KreiranjeNarudžbe.Designer.cs">
       <DependentUpon>KreiranjeNarudžbe.cs</DependentUpon>
     </Compile>
-    <Compile Include="Administracija\ManageZahvata.cs">
+    <Compile Include="Administracija\Zahvati\ManageZahvata.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Administracija\ManageZahvata.Designer.cs">
+    <Compile Include="Administracija\Zahvati\ManageZahvata.Designer.cs">
       <DependentUpon>ManageZahvata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\PregledPacijenti.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\PregledPacijenti.Designer.cs">
+      <DependentUpon>PregledPacijenti.cs</DependentUpon>
     </Compile>
     <Compile Include="Početna.cs">
       <SubType>Form</SubType>
@@ -77,13 +92,16 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Administracija\ManageZahvata.resx">
+    <EmbeddedResource Include="Administracija\RadnoVrijeme\ManageRadnoVrijeme.resx">
+      <DependentUpon>ManageRadnoVrijeme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Administracija\Zahvati\ManageZahvata.resx">
       <DependentUpon>ManageZahvata.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Administracija\PregledZahvata.resx">
-      <DependentUpon>PregledZahvata.cs</DependentUpon>
+    <EmbeddedResource Include="Administracija\Zahvati\PregledZahvati.resx">
+      <DependentUpon>PregledZahvati.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KreiranjeNarudžbe.resx">
+    <EmbeddedResource Include="App\KreiranjeNarudžbe.resx">
       <DependentUpon>KreiranjeNarudžbe.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Početna.resx">
@@ -112,10 +130,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App\" />
-    <Folder Include="Dashboard\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{1c8a476b-3731-4fcc-aa63-ae8797d14611}</Project>

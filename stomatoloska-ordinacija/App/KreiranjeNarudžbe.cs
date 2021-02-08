@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace stomatoloska_ordinacija
+namespace stomatoloska_ordinacija.App
 {
     public partial class KreiranjeNarudžbe : Form
     {
