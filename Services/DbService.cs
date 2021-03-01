@@ -6,10 +6,11 @@ using System.Data.SqlClient;
 using System.Linq;
 using System;
 using Services.RadnoVrijeme;
+using Services.NarudzbeService;
 
 namespace Services
 {
-    public class DbService : IZahvatService, ITrajanjeServiceService, IRadnoVrijemeService
+    public class DbService : IZahvatService, ITrajanjeServiceService, IRadnoVrijemeService, INarudzbeService 
     {
         private static DbService instance = new DbService();
         private SqlConnection connection { get; set; }

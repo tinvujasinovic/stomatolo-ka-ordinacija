@@ -23,12 +23,11 @@ namespace stomatoloska_ordinacija
 
             InitializeComponent();
 
-            var item = new CalendarItem(calendar1, new DateTime(2021, 2, 4, 11, 30, 0, 0), new TimeSpan(0, 120, 0), "Testni dogadaj");
+            var item = new CalendarItem(calendar1, DateTime.Now.AddMinutes(-DateTime.Now.Minute).AddHours(-2), new TimeSpan(0, 120, 0), "Testni dogadaj");
             item.BackgroundColor = Color.Orange;
             item.Tag = 1;
 
             _items.Add(item);
-            _items.Add(new CalendarItem(calendar1, new DateTime(2021, 2, 4, 11, 30, 0, 0), new TimeSpan(3, 0, 0), "Testni dogadaj2"));
 
             var dates = GetStartingDates();
 
@@ -41,16 +40,16 @@ namespace stomatoloska_ordinacija
         {
             foreach (CalendarItem calendarItem in _items)
             {
-                if (this.calendar1.ViewIntersects(calendarItem))
+                if (calendar1.ViewIntersects(calendarItem))
                 {
-                    this.calendar1.Items.Add(calendarItem);
+                    calendar1.Items.Add(calendarItem);
                 }
             }
         }
 
         private void monthView1_SelectionChanged(object sender, EventArgs e)
         {
-            this.calendar1.SetViewRange(this.monthView1.SelectionStart.Date, this.monthView1.SelectionEnd.Date);
+            calendar1.SetViewRange(this.monthView1.SelectionStart.Date, this.monthView1.SelectionEnd.Date);
         }
 
         #region Izbornik
@@ -135,5 +134,12 @@ namespace stomatoloska_ordinacija
         }
         #endregion
 
+        private void calendar1_ItemDoubleClick(object sender, CalendarItemEventArgs e)
+        {
+            var item = e.Item;
+            int itemId = (int)item.Tag;
+
+            //dbService.
+        }
     }
 }
