@@ -234,7 +234,7 @@ namespace Services
                 {
 
                     connection.Open();
-                    var cmd = ExecuteQuery($"UPDATE dbo.Patient SET FirstName = '{model.FirstName}', LastName = '{model.LastName}', DateOfBirth = '{FormatDate(model.DateOfBirth)}', Phone = {model.Phone}, Address = {model.Address} WHERE Id = {model.Id}");
+                    var cmd = ExecuteQuery($"UPDATE dbo.Patient SET FirstName = '{model.FirstName}', LastName = '{model.LastName}', DateOfBirth = '{FormatDate(model.DateOfBirth)}', Phone = '{model.Phone}', Address = '{model.Address}' WHERE Id = {model.Id}");
 
                     cmd.ExecuteNonQuery();
                     connection.Close();
@@ -253,7 +253,7 @@ namespace Services
                 }
 
             }
-            catch (Exception e)
+            catch
             {
                 connection.Close();
                 return false;
