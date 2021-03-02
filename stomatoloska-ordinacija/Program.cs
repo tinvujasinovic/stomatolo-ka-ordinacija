@@ -1,9 +1,4 @@
-﻿using stomatoloska_ordinacija.Administracija;
-using System;
-using System.
-    Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 
 namespace stomatoloska_ordinacija
@@ -18,7 +13,7 @@ namespace stomatoloska_ordinacija
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Početna());
+            Application.Run(new Main());
         }
     }
 }

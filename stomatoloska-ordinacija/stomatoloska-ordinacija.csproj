@@ -54,58 +54,76 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Administracija\RadnoVrijeme\ManageRadnoVrijeme.cs">
+    <Compile Include="Administration\Patients\ManagePatient.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Administracija\RadnoVrijeme\ManageRadnoVrijeme.Designer.cs">
-      <DependentUpon>ManageRadnoVrijeme.cs</DependentUpon>
+    <Compile Include="Administration\Patients\ManagePatient.Designer.cs">
+      <DependentUpon>ManagePatient.cs</DependentUpon>
     </Compile>
-    <Compile Include="Administracija\Zahvati\PregledZahvati.cs">
+    <Compile Include="Administration\Patients\OverviewPatients.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Administracija\Zahvati\PregledZahvati.Designer.cs">
-      <DependentUpon>PregledZahvati.cs</DependentUpon>
+    <Compile Include="Administration\Patients\OverviewPatients.Designer.cs">
+      <DependentUpon>OverviewPatients.cs</DependentUpon>
     </Compile>
-    <Compile Include="App\KreiranjeNarudžbe.cs">
+    <Compile Include="Administration\WorkHours\ManageWorkHours.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="App\KreiranjeNarudžbe.Designer.cs">
-      <DependentUpon>KreiranjeNarudžbe.cs</DependentUpon>
+    <Compile Include="Administration\WorkHours\ManageWorkHours.Designer.cs">
+      <DependentUpon>ManageWorkHours.cs</DependentUpon>
     </Compile>
-    <Compile Include="Administracija\Zahvati\ManageZahvata.cs">
+    <Compile Include="Administration\Operations\OverviewOperations.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Administracija\Zahvati\ManageZahvata.Designer.cs">
-      <DependentUpon>ManageZahvata.cs</DependentUpon>
+    <Compile Include="Administration\Operations\OverviewOperations.Designer.cs">
+      <DependentUpon>OverviewOperations.cs</DependentUpon>
     </Compile>
-    <Compile Include="App\PregledPacijenti.cs">
+    <Compile Include="App\Appointments\ManageAppointment.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="App\PregledPacijenti.Designer.cs">
-      <DependentUpon>PregledPacijenti.cs</DependentUpon>
+    <Compile Include="App\Appointments\ManageAppointment.Designer.cs">
+      <DependentUpon>ManageAppointment.cs</DependentUpon>
     </Compile>
-    <Compile Include="Početna.cs">
+    <Compile Include="Administration\Operations\ManageOperation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Početna.Designer.cs">
-      <DependentUpon>Početna.cs</DependentUpon>
+    <Compile Include="Administration\Operations\ManageOperation.Designer.cs">
+      <DependentUpon>ManageOperation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Appointments\OverviewAppointments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Appointments\OverviewAppointments.Designer.cs">
+      <DependentUpon>OverviewAppointments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Administracija\RadnoVrijeme\ManageRadnoVrijeme.resx">
-      <DependentUpon>ManageRadnoVrijeme.cs</DependentUpon>
+    <EmbeddedResource Include="Administration\Patients\ManagePatient.resx">
+      <DependentUpon>ManagePatient.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Administracija\Zahvati\ManageZahvata.resx">
-      <DependentUpon>ManageZahvata.cs</DependentUpon>
+    <EmbeddedResource Include="Administration\Patients\OverviewPatients.resx">
+      <DependentUpon>OverviewPatients.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Administracija\Zahvati\PregledZahvati.resx">
-      <DependentUpon>PregledZahvati.cs</DependentUpon>
+    <EmbeddedResource Include="Administration\WorkHours\ManageWorkHours.resx">
+      <DependentUpon>ManageWorkHours.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="App\KreiranjeNarudžbe.resx">
-      <DependentUpon>KreiranjeNarudžbe.cs</DependentUpon>
+    <EmbeddedResource Include="Administration\Operations\ManageOperation.resx">
+      <DependentUpon>ManageOperation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Početna.resx">
-      <DependentUpon>Početna.cs</DependentUpon>
+    <EmbeddedResource Include="Administration\Operations\OverviewOperations.resx">
+      <DependentUpon>OverviewOperations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Appointments\ManageAppointment.resx">
+      <DependentUpon>ManageAppointment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

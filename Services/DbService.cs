@@ -1,18 +1,18 @@
 ﻿using Model;
-using Services.Zahvati;
-using Services.Trajanja;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
 using System;
-using Services.RadnoVrijeme;
-using Services.NarudzbeService;
+using Services.Operations;
+using Services.Durations;
+using Services.WorkHours;
+using Services.Appointments;
+using Services.Patients;
 
 namespace Services
 {
-    public class DbService : IZahvatService, ITrajanjeServiceService, IRadnoVrijemeService, INarudzbeService 
+    public class DbService : IOperationsService, IDurationsService, IWorkHoursService, IAppointmentsService, IPatientsService
     {
-        private static DbService instance = new DbService();
+        private static readonly DbService instance = new DbService();
         private SqlConnection connection { get; set; }
 
         private DbService()
@@ -25,9 +25,9 @@ namespace Services
             return instance;
         }
 
-        #region Zahvat
+        #region Operation
 
-        public bool SaveZahvat(Zahvat model)
+        public bool SaveOperation(Operation model)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace Services
                 {
 
                     connection.Open();
-                    var cmd = ExecuteQuery($"UPDATE dbo.Zahvat SET Naziv = '{model.Naziv}', Sifra = '{model.Šifra}', Cijena = '{model.Cijena.ToString().Replace(',', '.')}', TrajanjeId = {model.Trajanje.Id} WHERE Id = {model.Id}");
+                    var cmd = ExecuteQuery($"UPDATE dbo.Operation SET Name = '{model.Name}', Code = '{model.Code}', Price = '{model.Price.ToString().Replace(',', '.')}', DurationId = {model.Duration.Id} WHERE Id = {model.Id}");
 
                     cmd.ExecuteNonQuery();
                     connection.Close();
@@ -45,7 +45,7 @@ namespace Services
                 else
                 {
                     connection.Open();
-                    var cmd = ExecuteQuery($"INSERT INTO dbo.Zahvat ([Sifra], [Naziv], [Cijena], [TrajanjeId]) VALUES ('{model.Šifra}', '{model.Naziv}', '{model.Cijena.ToString().Replace(',', '.')}', {model.Trajanje.Id})");
+                    var cmd = ExecuteQuery($"INSERT INTO dbo.Operation ([Code], [Name], [Price], [DurationId]) VALUES ('{model.Code}', '{model.Name}', '{model.Price.ToString().Replace(',', '.')}', {model.Duration.Id})");
 
                     cmd.ExecuteNonQuery();
                     connection.Close();
@@ -54,86 +54,62 @@ namespace Services
                 }
 
             }
-            catch(Exception e)
+            catch
             {
                 connection.Close();
                 return false;
             }
         }
 
-        public Zahvat GetZahvat(int id)
+        public Operation GetOperation(int id)
         {
             try {
-                var zahvat = new Zahvat();
+                var operation = new Operation();
                 connection.Open();
 
-                var cmd = ExecuteQuery($@"SELECT * FROM [dbo].Zahvat WHERE Active = 1 AND Id = {id}");
+                var cmd = ExecuteQuery($@"SELECT * FROM [dbo].vOperation WHERE Id = {id}");
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    zahvat = new Zahvat((int)reader.GetValue(0), (string)reader.GetValue(2), (string)reader.GetValue(3), (decimal)reader.GetValue(4), new Trajanje((int)reader.GetValue(5)));
+                    operation = new Operation((int)reader.GetValue(0), (string)reader.GetValue(1), (string)reader.GetValue(2), (decimal)reader.GetValue(3),
+                        new Duration((int)reader.GetValue(4), (string)reader.GetValue(5), (int)reader.GetValue(6)));
                 }
-                reader.Close();
-
-                cmd = ExecuteQuery($@"SELECT * FROM [dbo].Trajanje WHERE Id = {zahvat.Trajanje.Id}");
-
-                reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    zahvat.Trajanje.Naziv = (string)reader.GetValue(2);
-                    zahvat.Trajanje.TrajanjeUMin = (int)reader.GetValue(3);
-                }
-                reader.Close();
+                reader.Close();                           
 
                 connection.Close();
-                return zahvat;
+                return operation;
             }
-            catch(Exception e)
+            catch
             {
                 connection.Close();
                 return null;
             }   
         }
 
-        public List<Zahvat> GetAllZahvat()
+        public List<Operation> GetAllOperations()
         {
             try
             {
-                var lista = new List<Zahvat>();
+                var list = new List<Operation>();
                 connection.Open();
 
-                var cmd = ExecuteQuery($@"SELECT * FROM [dbo].Zahvat WHERE Active = 1");
+                var cmd = ExecuteQuery($@"SELECT * FROM [dbo].vOperation");
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    lista.Add(new Zahvat((int)reader.GetValue(0), (string)reader.GetValue(2), (string)reader.GetValue(3), (decimal)reader.GetValue(4), new Trajanje((int)reader.GetValue(5))));
+                    list.Add(new Operation((int)reader.GetValue(0), (string)reader.GetValue(1), (string)reader.GetValue(2), (decimal)reader.GetValue(3),
+                        new Duration((int)reader.GetValue(4), (string)reader.GetValue(5), (int)reader.GetValue(6))));
                 }
                 reader.Close();
 
-                foreach (var item in lista)
-                {
-
-                    cmd = ExecuteQuery($@"SELECT * FROM [dbo].Trajanje WHERE Id = {item.Trajanje.Id}");
-
-                    reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        item.Trajanje.Naziv = (string)reader.GetValue(2);
-                        item.Trajanje.TrajanjeUMin = (int)reader.GetValue(3);
-                    }
-                    reader.Close();
-                }
-
                 connection.Close();
-                return lista;
+                return list;
             }
-            catch(Exception e)
+            catch
             {
                 connection.Close();
                 return null;
@@ -141,18 +117,18 @@ namespace Services
          
         }
 
-        public bool DeleteZahvat(int id)
+        public bool DeleteOperation(int id)
         {
             try
             {
                 connection.Open();
-                var cmd = ExecuteQuery($"UPDATE [dbo].Zahvat SET Active = 0 WHERE Id = {id}");
+                var cmd = ExecuteQuery($"UPDATE [dbo].Operation SET Active = 0 WHERE Id = {id}");
                 cmd.ExecuteNonQuery();
                 connection.Close();
 
                 return true;
             }
-            catch(Exception e)
+            catch
             {
                 connection.Close();
                 return false;
@@ -161,28 +137,28 @@ namespace Services
 
         #endregion
 
-        #region Trajanje
+        #region Duration
 
-        public List<Trajanje> GetAllTrajanja()
+        public List<Duration> GetAllDurations()
         {
             try
             {
-                var lista = new List<Trajanje>();
+                var list = new List<Duration>();
                 connection.Open();
 
-                var cmd = ExecuteQuery($@"SELECT * FROM [dbo].Trajanje");
+                var cmd = ExecuteQuery($@"SELECT * FROM [dbo].Duration");
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    lista.Add(new Trajanje((int)reader.GetValue(0), (string)reader.GetValue(2), (int)reader.GetValue(3)));
+                    list.Add(new Duration((int)reader.GetValue(0), (string)reader.GetValue(2), (int)reader.GetValue(3)));
                 }
 
                 connection.Close();
-                return lista;
+                return list;
             }
-            catch(Exception e)
+            catch
             {
                 connection.Close();
                 return null;
@@ -192,25 +168,26 @@ namespace Services
 
         #endregion
 
-        #region Radno vrijeme
+        #region Work hours
 
-        public Model.RadnoVrijeme GetRadnoVrijeme()
+        public WorkHour GetWorkHours()
         {
             try
             {
-                var radno = new Model.RadnoVrijeme();
+                var radno = new WorkHour();
                 connection.Open();
                     
-                var cmd = ExecuteQuery($@"SELECT * FROM dbo.RadnoVrijeme WHERE Id = 1");
+                var cmd = ExecuteQuery($@"SELECT * FROM dbo.WorkHours WHERE Id = 1");
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    radno = new Model.RadnoVrijeme((DateTime)reader.GetValue(1), (DateTime)reader.GetValue(2));
+                    radno = new WorkHour((DateTime)reader.GetValue(1), (DateTime)reader.GetValue(2));
                     
                     reader.Close();
                     connection.Close();
+
                     return radno;
                 }
 
@@ -219,24 +196,62 @@ namespace Services
 
                 return null;
             }
-            catch (Exception e)
+            catch
             {
                 connection.Close();
                 return null;
             }
         }
 
-        public bool SaveRadnoVrijeme(Model.RadnoVrijeme model)
+        public bool SaveWorkHour(WorkHour model)
         {
             try
             {
                 connection.Open();
-                var cmd = ExecuteQuery($"UPDATE dbo.RadnoVrijeme SET Pocetak = '{FormatDate(model.Pocetak)}', Kraj = '{FormatDate(model.Kraj)}' WHERE Id = 1");
+                var cmd = ExecuteQuery($"UPDATE dbo.WorkHours SET StartTime = '{FormatDate(model.StartTime)}', EndTime = '{FormatDate(model.EndTime)}' WHERE Id = 1");
 
                 cmd.ExecuteNonQuery();
                 connection.Close();
 
                 return true;
+            }
+            catch
+            {
+                connection.Close();
+                return false;
+            }
+        }
+
+        #endregion
+
+        #region Patients
+
+        public bool SavePatient(Patient model)
+        {
+            try
+            {
+                if (model.Id > 0)
+                {
+
+                    connection.Open();
+                    var cmd = ExecuteQuery($"UPDATE dbo.Patient SET FirstName = '{model.FirstName}', LastName = '{model.LastName}', DateOfBirth = '{FormatDate(model.DateOfBirth)}', Phone = {model.Phone}, Address = {model.Address} WHERE Id = {model.Id}");
+
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+
+                    return true;
+                }
+                else
+                {
+                    connection.Open();
+                    var cmd = ExecuteQuery($"INSERT INTO dbo.Patient ([FirstName], [LastName], [DateOfBirth], [Phone], [Address]) VALUES ('{model.FirstName}', '{model.LastName}', '{FormatDate(model.DateOfBirth)}', '{model.Phone}', '{model.Address}')");
+
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+
+                    return true;
+                }
+
             }
             catch (Exception e)
             {
@@ -245,7 +260,82 @@ namespace Services
             }
         }
 
+        public Patient GetPatient(int id)
+        {
+            try
+            {
+                var patient = new Patient();
+                connection.Open();
+
+                var cmd = ExecuteQuery($@"SELECT [Id], [FirstName], [LastName], [DateOfBirth], [Phone], [Address] FROM [dbo].Patient WHERE Active = 1 AND Id = {id}");
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    patient = new Patient((int)reader.GetValue(0), (string)reader.GetValue(1), (string)reader.GetValue(2), (DateTime)reader.GetValue(3), (string)reader.GetValue(4), (string)reader.GetValue(5));
+                }
+                reader.Close();
+
+                connection.Close();
+                return patient;
+            }
+            catch
+            {
+                connection.Close();
+                return null;
+            }
+        }
+
+        public List<Patient> GetAllPatients()
+        {
+            try
+            {
+                var list = new List<Patient>();
+                connection.Open();
+
+                var cmd = ExecuteQuery($@"SELECT [Id], [FirstName], [LastName], [DateOfBirth], [Phone], [Address] FROM [dbo].Patient WHERE Active = 1");
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    list.Add(new Patient((int)reader.GetValue(0), (string)reader.GetValue(1), (string)reader.GetValue(2), (DateTime)reader.GetValue(3), (string)reader.GetValue(4), (string)reader.GetValue(5)));
+                }
+                reader.Close();
+
+                connection.Close();
+                return list;
+            }
+            catch
+            {
+                connection.Close();
+                return null;
+            }
+
+        }
+
+        public bool DeletePatient(int id)
+        {
+            try
+            {
+                connection.Open();
+                var cmd = ExecuteQuery($"UPDATE [dbo].Patient SET Active = 0 WHERE Id = {id}");
+                cmd.ExecuteNonQuery();
+                connection.Close();
+
+                return true;
+            }
+            catch
+            {
+                connection.Close();
+                return false;
+            }
+        }
+
         #endregion
+
+        #region Private
 
         private SqlCommand ExecuteQuery(string cmd)
         {
@@ -259,5 +349,6 @@ namespace Services
             return dateString;
         }
 
+        #endregion
     }
 }
