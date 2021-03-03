@@ -17,9 +17,27 @@ namespace Model
             Operation = operation;
         }
 
+        public Appointment(int id, bool completed, DateTime time, Patient patient, Operation operation)
+        {
+            Id = id;
+            Time = time;
+            Patient = patient;
+            Operation = operation;
+            Completed = completed;
+        }
+
+        public Appointment()
+        {
+
+        }
+
         public override string ToString()
         {
-            return $"{Operation.Code} - {Operation.Name} \n {Patient.FullName}";
+            if(Operation.Duration.DurationInMinutes > 30)
+                return $"{Operation.Code} - {Operation.Name} \n{Patient.FullName}";
+            else
+                return $"{Operation.Code} - {Patient.FullName}";
+
         }
     }
 }

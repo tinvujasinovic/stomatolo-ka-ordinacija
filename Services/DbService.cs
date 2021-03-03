@@ -67,7 +67,7 @@ namespace Services
                 var operation = new Operation();
                 connection.Open();
 
-                var cmd = ExecuteQuery($@"SELECT * FROM [dbo].vOperation WHERE Id = {id}");
+                var cmd = ExecuteQuery($"SELECT * FROM [dbo].vOperation WHERE Id = {id}");
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
@@ -95,7 +95,7 @@ namespace Services
                 var list = new List<Operation>();
                 connection.Open();
 
-                var cmd = ExecuteQuery($@"SELECT * FROM [dbo].vOperation");
+                var cmd = ExecuteQuery($"SELECT * FROM [dbo].vOperation");
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
@@ -146,7 +146,7 @@ namespace Services
                 var list = new List<Duration>();
                 connection.Open();
 
-                var cmd = ExecuteQuery($@"SELECT * FROM [dbo].Duration");
+                var cmd = ExecuteQuery($"SELECT * FROM [dbo].Duration");
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
@@ -177,7 +177,7 @@ namespace Services
                 var radno = new WorkHour();
                 connection.Open();
                     
-                var cmd = ExecuteQuery($@"SELECT * FROM dbo.WorkHours WHERE Id = 1");
+                var cmd = ExecuteQuery($"SELECT * FROM dbo.WorkHours WHERE Id = 1");
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
@@ -267,7 +267,7 @@ namespace Services
                 var patient = new Patient();
                 connection.Open();
 
-                var cmd = ExecuteQuery($@"SELECT [Id], [FirstName], [LastName], [DateOfBirth], [Phone], [Address] FROM [dbo].Patient WHERE Active = 1 AND Id = {id}");
+                var cmd = ExecuteQuery($"SELECT [Id], [FirstName], [LastName], [DateOfBirth], [Phone], [Address] FROM [dbo].Patient WHERE Active = 1 AND Id = {id}");
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
@@ -294,7 +294,7 @@ namespace Services
                 var list = new List<Patient>();
                 connection.Open();
 
-                var cmd = ExecuteQuery($@"SELECT [Id], [FirstName], [LastName], [DateOfBirth], [Phone], [Address] FROM [dbo].Patient WHERE Active = 1");
+                var cmd = ExecuteQuery($"SELECT [Id], [FirstName], [LastName], [DateOfBirth], [Phone], [Address] FROM [dbo].Patient WHERE Active = 1");
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
@@ -335,6 +335,196 @@ namespace Services
 
         #endregion
 
+        #region Appointments
+
+        public bool SaveAppointment(Appointment model)
+        {
+            try
+            {
+                if (model.Id > 0)
+                {
+
+                    connection.Open();
+                    var cmd = ExecuteQuery($"UPDATE dbo.Appointment SET Time = '{FormatDate(model.Time)}', PatientId = {model.Patient.Id}, OperationId = {model.Operation.Id} WHERE Id = {model.Id}");
+
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+
+                    return true;
+                }
+                else
+                {
+                    connection.Open();
+                    var endTime = model.Time.AddMinutes(model.Operation.Duration.DurationInMinutes);
+                    var cmd = ExecuteQuery($"INSERT INTO dbo.Appointment ([Time], [Completed], [PatientId], [OperationId], [EndTime]) VALUES ('{FormatDate(model.Time)}', {0}, {model.Patient.Id}, {model.Operation.Id}, '{FormatDate(endTime)}')");
+
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+
+                    return true;
+                }
+
+            }
+            catch
+            {
+                connection.Close();
+                return false;
+            }
+        }
+
+        public Appointment GetAppointment(int id)
+        {
+            try
+            {
+                var appointment = new Appointment();
+                connection.Open();
+
+                var cmd = ExecuteQuery($"SELECT * FROM [dbo].vAppointment WHERE Id = {id}");
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    appointment = new Appointment((int)reader.GetValue(0), (bool)reader.GetValue(1), (DateTime)reader.GetValue(2),
+                        new Patient((int)reader.GetValue(3), (string)reader.GetValue(4), (string)reader.GetValue(5)), 
+                        new Operation((int)reader.GetValue(6), (string)reader.GetValue(7), (string)reader.GetValue(8), new Duration((int)reader.GetValue(9), (string)reader.GetValue(10))));
+                }
+                reader.Close();
+
+                connection.Close();
+                return appointment;
+            }
+            catch
+            {
+                connection.Close();
+                return null;
+            }
+        }
+
+        public List<Appointment> GetAllAppointments()
+        {
+            try
+            {
+                var list = new List<Appointment>();
+                connection.Open();
+
+                var cmd = ExecuteQuery($"SELECT * FROM [dbo].vAppointment");
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    list.Add(new Appointment((int)reader.GetValue(0), (bool)reader.GetValue(1), (DateTime)reader.GetValue(2),
+                        new Patient((int)reader.GetValue(3), (string)reader.GetValue(4), (string)reader.GetValue(5)),
+                        new Operation((int)reader.GetValue(6), (string)reader.GetValue(7), (string)reader.GetValue(8), new Duration((int)reader.GetValue(9), (string)reader.GetValue(10)))));
+                }
+                reader.Close();
+
+                connection.Close();
+                return list;
+            }
+            catch
+            {
+                connection.Close();
+                return null;
+            }
+        }
+
+
+        public List<Appointment> GetAllAppointments(DateTime start, DateTime end)
+        {
+            var list = new List<Appointment>();
+            try
+            {
+                connection.Open();
+
+                var cmd = ExecuteQuery($"SELECT * FROM [dbo].vAppointment WHERE Time >= '{FormatDate(start)}' AND EndTime <= '{FormatDate(end)}'");
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    list.Add(new Appointment((int)reader.GetValue(0), (bool)reader.GetValue(1), (DateTime)reader.GetValue(2),
+                        new Patient((int)reader.GetValue(3), (string)reader.GetValue(4), (string)reader.GetValue(5)),
+                        new Operation((int)reader.GetValue(6), (string)reader.GetValue(7), (string)reader.GetValue(8), new Duration((int)reader.GetValue(9), (string)reader.GetValue(10), (int)reader.GetValue(11)))));
+                }
+                reader.Close();
+
+                connection.Close();
+                return list;
+            }
+            catch
+            {
+                connection.Close();
+                return list;
+            }
+        }
+
+        public bool DeleteAppointment(int id)
+        {
+            try
+            {
+                connection.Open();
+                var cmd = ExecuteQuery($"UPDATE [dbo].Appointment SET Active = 0 WHERE Id = {id}");
+                cmd.ExecuteNonQuery();
+                connection.Close();
+
+                return true;
+            }
+            catch
+            {
+                connection.Close();
+                return false;
+            }
+        }
+
+        public bool CheckAvailability(DateTime start, int duration)
+        {
+            try
+            {
+                var available = false;
+
+                connection.Open();
+                var endTime = start.AddMinutes(duration);
+                var cmd = ExecuteQuery($"SELECT COUNT(*) FROM dbo.Appointment WHERE (Time > '{FormatDate(start)}' AND Time < '{FormatDate(endTime)}') OR (EndTime > '{FormatDate(start)}' AND EndTime < '{FormatDate(endTime)}') AND Active = 1");
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    available = !((int)reader.GetValue(0) > 0);
+                }
+
+                reader.Close();
+                connection.Close();
+
+                return available;
+            }
+            catch 
+            {
+                connection.Close();
+                return false;
+            }
+        }
+
+        public bool ChangeAppointmentCompleteFlag(int id, int bitValue)
+        {
+            try
+            {
+                connection.Open();
+                var cmd = ExecuteQuery($"UPDATE [dbo].Appointment SET Completed = {bitValue} WHERE Id = {id}");
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch
+            {
+                connection.Close();
+                return false;
+            }
+        }
+
+        #endregion
+
         #region Private
 
         private SqlCommand ExecuteQuery(string cmd)
@@ -344,7 +534,7 @@ namespace Services
 
         private string FormatDate(DateTime date)
         {
-            string dateString = $"{date.Year}-{date.Month}-{date.Day} {date.Hour}:{date.Minute}:{date.Second}.{date.Millisecond}";
+            string dateString = $"{date.Year}-{date.Month}-{date.Day} {date.Hour}:{date.Minute}:{date.Second}.{0}";
 
             return dateString;
         }

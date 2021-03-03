@@ -57,8 +57,8 @@ namespace stomatoloska_ordinacija.Administration.WorkHours
             if (dbService.SaveWorkHour(new WorkHour(dateTimePicker1.Value, dateTimePicker2.Value)))
             {
                 MessageBox.Show("Radno vrijeme je uspješno ažurirano.");
-                button1.DialogResult = DialogResult.OK;
                 Close();
+                DialogResult = DialogResult.OK;
             }
             else
             {

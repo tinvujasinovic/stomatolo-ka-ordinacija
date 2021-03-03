@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using WindowsFormsCalendar;
 using stomatoloska_ordinacija.App.Appointments;
 using stomatoloska_ordinacija.Administration.Patients;
+using Services.Appointments;
+using Services.WorkHours;
 
 namespace stomatoloska_ordinacija
 {
@@ -16,7 +18,8 @@ namespace stomatoloska_ordinacija
 
     public partial class Main : Form
     {
-        private DbService dbService = DbService.GetInstance();
+        private AppointmentsService appointmentsService= new AppointmentsService();
+        private WorkHoursService workHoursService= new WorkHoursService();
 
         private List<CalendarItem> _items = new List<CalendarItem>();
 
@@ -25,17 +28,11 @@ namespace stomatoloska_ordinacija
 
             InitializeComponent();
 
-            var item = new CalendarItem(calendar1, DateTime.Now.AddMinutes(-DateTime.Now.Minute).AddHours(-2), new TimeSpan(0, 120, 0), "Testni dogadaj")
-            {
-                BackgroundColor = Color.Orange,
-                Tag = 1
-            };
-
-            _items.Add(item);
-
             var dates = GetStartingDates();
 
             calendar1.SetViewRange(dates.Item1, dates.Item2);
+
+            GetAppointmentsForCalendar(dates.Item1, dates.Item2);
 
             SetHighlights();
         }
@@ -53,7 +50,27 @@ namespace stomatoloska_ordinacija
 
         private void monthView1_SelectionChanged(object sender, EventArgs e)
         {
-            calendar1.SetViewRange(this.monthView1.SelectionStart.Date, this.monthView1.SelectionEnd.Date);
+            calendar1.SetViewRange(monthView1.SelectionStart.Date, monthView1.SelectionEnd.Date);
+
+            GetAppointmentsForCalendar(monthView1.SelectionStart.Date, monthView1.SelectionEnd.Date);
+        }
+
+        private void calendar1_ItemDoubleClick(object sender, CalendarItemEventArgs e)
+        {
+            var item = e.Item;
+
+            if(item.Tag == null)
+            {
+                _items.Remove(item);
+                return;
+            }
+
+            int appointmentId = (int)item.Tag;
+
+            if (appointmentsService.ChangeAppointmentCompleteFlag(appointmentId, item.BackgroundColor == Color.Orange ? 1 : 0))
+            {
+                item.BackgroundColor = item.BackgroundColor == Color.Orange ? Color.Green : Color.Orange;
+            }
         }
 
         #region Izbornik
@@ -114,7 +131,7 @@ namespace stomatoloska_ordinacija
         private void SetHighlights()
         {
 
-            var workHours = dbService.GetWorkHours();
+            var workHours = workHoursService.GetWorkHours();
 
             if (workHours == null)
             {
@@ -143,16 +160,32 @@ namespace stomatoloska_ordinacija
             }
             calendar1.HighlightRanges = highlightRanges.ToArray();
         }
-        #endregion
 
-        private void calendar1_ItemDoubleClick(object sender, CalendarItemEventArgs e)
+        private void GetAppointmentsForCalendar(DateTime start, DateTime end)
         {
-            var item = e.Item;
-            int itemId = (int)item.Tag;
+            _items.Clear();
 
-            //dbService.
-            //TODO
+            var appointments = appointmentsService.GetAllAppointments(start, end);
+
+            foreach (var appointment in appointments)
+            {
+                var item = new CalendarItem(calendar1, appointment.Time, new TimeSpan(0, appointment.Operation.Duration.DurationInMinutes, 0), appointment.ToString())
+                {
+                    BackgroundColor = appointment.Completed ? Color.Green : Color.Orange,
+                    Tag = appointment.Id
+                };
+
+                _items.Add(item);
+            }
+
+            foreach (CalendarItem calendarItem in _items)
+            {
+                if (calendar1.ViewIntersects(calendarItem))
+                {
+                    calendar1.Items.Add(calendarItem);
+                }
+            }
         }
-
+        #endregion
     }
 }

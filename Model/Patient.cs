@@ -23,6 +23,13 @@ namespace Model
             Address = address;
         }
 
+        public Patient(int id, string firstName, string lastName)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+        }
+
         public Patient()
         {
 

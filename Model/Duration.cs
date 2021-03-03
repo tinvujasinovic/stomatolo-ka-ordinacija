@@ -12,5 +12,11 @@
             Name = name;
             DurationInMinutes = duration;
         }
+
+        public Duration(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
     }
 }

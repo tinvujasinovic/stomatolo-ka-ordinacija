@@ -17,6 +17,14 @@
             Duration = duration;
         }
 
+        public Operation(int id, string code, string name, Duration duration)
+        {
+            Id = id;
+            Name = name;
+            Code = code;
+            Duration = duration;
+        }
+
         public Operation()
         {
 
