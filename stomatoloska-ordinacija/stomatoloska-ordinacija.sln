@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "stomatoloska-ordinacija", "stomatoloska-ordinacija.csproj", "{0897DBFE-B736-438F-9069-2ECFDE64C5E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "..\Services\Services.csproj", "{3CA92E36-3F2D-4A84-A243-EE4AC441C170}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "..\Services\Services.csproj", "{3CA92E36-3F2D-4A84-A243-EE4AC441C170}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "..\Model\Model.csproj", "{1C8A476B-3731-4FCC-AA63-AE8797D14611}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "..\Model\Model.csproj", "{1C8A476B-3731-4FCC-AA63-AE8797D14611}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
