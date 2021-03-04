@@ -3,6 +3,8 @@ using System;
 using Services;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using Services.Operations;
+using Services.Durations;
 
 namespace stomatoloska_ordinacija.Administration.Operations
 {
@@ -10,7 +12,9 @@ namespace stomatoloska_ordinacija.Administration.Operations
     {
         private readonly bool IsUpdate = false;
         private Operation Operation { get; set; }
-        private readonly List<Duration> durations = DbService.GetInstance().GetAllDurations();
+        private readonly List<Duration> durations = new DurationsService().GetAllDurations();
+
+        private readonly OperationsService operationsService = new OperationsService();
 
         public ManageOperation()
         {
@@ -32,7 +36,7 @@ namespace stomatoloska_ordinacija.Administration.Operations
             inputDuration.DisplayMember = "Name";
             inputDuration.ValueMember = "Id";
 
-            var operation = DbService.GetInstance().GetOperation(id);
+            var operation = operationsService.GetOperation(id);
 
             Name = "Uredi zahvat";
             title.Text = $"Uređivanje zahvata";
@@ -79,8 +83,7 @@ namespace stomatoloska_ordinacija.Administration.Operations
                 Operation.Price = inputPrice.Value;
                 Operation.Duration = (Duration)inputDuration.SelectedItem;
 
-                DbService dbService = DbService.GetInstance();
-                if (dbService.SaveOperation(Operation))
+                if (operationsService.SaveOperation(Operation))
                 {
                     MessageBox.Show("Zahvat je uspješno ažuriran.");
                     Close();
@@ -94,9 +97,8 @@ namespace stomatoloska_ordinacija.Administration.Operations
             else
             {
                 var operation = new Operation(0, inputName.Text.Trim(), inputCode.Text.Trim(), inputPrice.Value, (Duration)inputDuration.SelectedItem);
-                DbService dbService = DbService.GetInstance();
 
-                if (dbService.SaveOperation(operation))
+                if (operationsService.SaveOperation(operation))
                 {
                     MessageBox.Show("Zahvat je uspješno kreiran.");
                     Close();

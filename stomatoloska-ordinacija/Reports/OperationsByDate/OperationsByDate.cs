@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using Telerik.ReportViewer.WinForms;
 
-namespace stomatoloska_ordinacija.Reports.Forms
+namespace stomatoloska_ordinacija.Reports.OperationsByDate
 {
     public partial class OperationsByDate : Form
     {
@@ -18,7 +13,11 @@ namespace stomatoloska_ordinacija.Reports.Forms
 
         private void ReportViewerForm1_Load(object sender, EventArgs e)
         {
-            this.reportViewer1.RefreshReport();
+            reportViewer1.ViewMode = ViewMode.PrintPreview;
+            reportViewer1.ShowPrintPreviewButton = false;
+
+            reportViewer1.RefreshReport();
         }
+
     }
 }

@@ -44,5 +44,10 @@ namespace Services.Appointments
         {
             return db.ChangeAppointmentCompleteFlag(id, bitValue);
         }
+
+        public bool CheckWorkHours(DateTime start, int duration)
+        {
+            return db.CheckWorkHours(start, duration);
+        }
     }
 }

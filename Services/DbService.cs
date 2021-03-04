@@ -7,6 +7,7 @@ using Services.Durations;
 using Services.WorkHours;
 using Services.Appointments;
 using Services.Patients;
+using System.Data;
 
 namespace Services
 {
@@ -485,21 +486,49 @@ namespace Services
                 var available = false;
 
                 connection.Open();
+
                 var endTime = start.AddMinutes(duration);
-                var cmd = ExecuteQuery($"SELECT COUNT(*) FROM dbo.Appointment WHERE (Time > '{FormatDate(start)}' AND Time < '{FormatDate(endTime)}') OR (EndTime > '{FormatDate(start)}' AND EndTime < '{FormatDate(endTime)}') AND Active = 1");
 
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    available = !((int)reader.GetValue(0) > 0);
-                }
+                var cmd = ExecuteQuery("CheckAvailabilitySP");
 
-                reader.Close();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@Start", start));
+                cmd.Parameters.Add(new SqlParameter("@End", endTime));
+
+                available = !((int)cmd.ExecuteScalar() > 0);
                 connection.Close();
 
                 return available;
             }
-            catch 
+            catch
+            {
+                connection.Close();
+                return false;
+            }
+        }
+
+        public bool CheckWorkHours(DateTime start, int duration)
+        {
+            try
+            {
+                var withinWorkHours = false;
+
+                connection.Open();
+
+                var endTime = start.AddMinutes(duration);
+
+                var cmd = ExecuteQuery("CheckWorkHoursSP");
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@Start", start));
+                cmd.Parameters.Add(new SqlParameter("@End", endTime));
+
+                withinWorkHours = (bool)cmd.ExecuteScalar();
+                connection.Close();
+
+                return withinWorkHours;
+            }
+            catch
             {
                 connection.Close();
                 return false;

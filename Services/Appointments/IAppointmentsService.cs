@@ -13,5 +13,6 @@ namespace Services.Appointments
         bool DeleteAppointment(int id);
         bool CheckAvailability(DateTime start, int duration);
         bool ChangeAppointmentCompleteFlag(int id, int bitValue);
+        bool CheckWorkHours(DateTime start, int duration);
     }
 }

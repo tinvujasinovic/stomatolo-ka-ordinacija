@@ -1,5 +1,6 @@
 ﻿using Model;
 using Services;
+using Services.WorkHours;
 using System;
 using System.Windows.Forms;
 
@@ -7,6 +8,8 @@ namespace stomatoloska_ordinacija.Administration.WorkHours
 {
     public partial class ManageWorkHours : Form
     {
+        private readonly WorkHoursService workHoursService = new WorkHoursService();
+
         public ManageWorkHours()
         {
             InitializeComponent();
@@ -19,7 +22,7 @@ namespace stomatoloska_ordinacija.Administration.WorkHours
             dateTimePicker2.ShowUpDown = true;
             dateTimePicker2.CustomFormat = "HH:mm";
 
-            WorkHour workHours = DbService.GetInstance().GetWorkHours();
+            WorkHour workHours = workHoursService.GetWorkHours();
 
             if(workHours == null)
             {
@@ -53,8 +56,7 @@ namespace stomatoloska_ordinacija.Administration.WorkHours
                 return;
             }
 
-            DbService dbService = DbService.GetInstance();
-            if (dbService.SaveWorkHour(new WorkHour(dateTimePicker1.Value, dateTimePicker2.Value)))
+            if (workHoursService.SaveWorkHour(new WorkHour(dateTimePicker1.Value, dateTimePicker2.Value)))
             {
                 MessageBox.Show("Radno vrijeme je uspješno ažurirano.");
                 Close();

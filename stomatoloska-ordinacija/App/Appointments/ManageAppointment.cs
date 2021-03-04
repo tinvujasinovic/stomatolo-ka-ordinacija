@@ -1,5 +1,8 @@
 ﻿using Model;
 using Services;
+using Services.Appointments;
+using Services.Operations;
+using Services.Patients;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,8 +14,10 @@ namespace stomatoloska_ordinacija.App.Appointments
     {
         private readonly bool IsUpdate = false;
         private Appointment Appointment { get; set; }
-        private readonly List<Patient> patients = DbService.GetInstance().GetAllPatients();
-        private readonly List<Operation> operations = DbService.GetInstance().GetAllOperations();
+        private readonly List<Patient> patients = new PatientsService().GetAllPatients();
+        private readonly List<Operation> operations = new OperationsService().GetAllOperations();
+
+        private readonly AppointmentsService appointmentsService = new AppointmentsService();
 
         public ManageAppointment()
         {
@@ -45,10 +50,10 @@ namespace stomatoloska_ordinacija.App.Appointments
             inputOperation.ValueMember = "Id";
 
             inputPatient.DataSource = patients;
-            inputPatient.DisplayMember = "Name";
+            inputPatient.DisplayMember = "FullName";
             inputPatient.ValueMember = "Id";
 
-            var appointment = DbService.GetInstance().GetAppointment(id);
+            var appointment = appointmentsService.GetAppointment(id);
 
             Name = "Uredi narudžbu";
             title.Text = $"Uređivanje narudžbe";
@@ -89,15 +94,20 @@ namespace stomatoloska_ordinacija.App.Appointments
             var operation = (Operation)inputOperation.SelectedItem;
 
             var appointment = new Appointment(dateTimePicker1.Value, patient, operation);
-            DbService dbService = DbService.GetInstance();
 
-            if (!dbService.CheckAvailability(appointment.Time, operation.Duration.DurationInMinutes))
+            if (!appointmentsService.CheckAvailability(appointment.Time, operation.Duration.DurationInMinutes))
             {
                 MessageBox.Show("Odabrani termin je zauzet!");
                 return;
             }
 
-            if (dbService.SaveAppointment(appointment))
+            if (!appointmentsService.CheckWorkHours(appointment.Time, operation.Duration.DurationInMinutes))
+            {
+                MessageBox.Show("Odabrano vrijeme je izvan radnog vremena!");
+                return;
+            }
+
+            if (appointmentsService.SaveAppointment(appointment))
             {
                 inputOperation.SelectedItem = null;
                 priceBox.Text = string.Empty;
@@ -153,15 +163,19 @@ namespace stomatoloska_ordinacija.App.Appointments
                 Appointment.Patient = patient;
                 Appointment.Operation = operation;
 
-                DbService dbService = DbService.GetInstance();
-
-                if (!dbService.CheckAvailability(Appointment.Time, Appointment.Operation.Duration.DurationInMinutes))
+                if (!appointmentsService.CheckAvailability(Appointment.Time, Appointment.Operation.Duration.DurationInMinutes))
                 {
                     MessageBox.Show("Odabrani termin je zauzet!");
                     return;
                 }
 
-                if (dbService.SaveAppointment(Appointment))
+                if (!appointmentsService.CheckWorkHours(Appointment.Time, operation.Duration.DurationInMinutes))
+                {
+                    MessageBox.Show("Odabrano vrijeme je izvan radnog vremena!");
+                    return;
+                }
+
+                if (appointmentsService.SaveAppointment(Appointment))
                 {
                     MessageBox.Show("Narudžba je uspješno ažurirana.");
                     Close();
@@ -175,15 +189,20 @@ namespace stomatoloska_ordinacija.App.Appointments
             else
             {
                 var appointment = new Appointment(dateTimePicker1.Value, patient, operation);
-                DbService dbService = DbService.GetInstance();
 
-                if (!dbService.CheckAvailability(appointment.Time, operation.Duration.DurationInMinutes))
+                if (!appointmentsService.CheckAvailability(appointment.Time, operation.Duration.DurationInMinutes))
                 {
                     MessageBox.Show("Odabrani termin je zauzet!");
                     return;
                 }
 
-                if (dbService.SaveAppointment(appointment))
+                if (!appointmentsService.CheckWorkHours(appointment.Time, operation.Duration.DurationInMinutes))
+                {
+                    MessageBox.Show("Odabrano vrijeme je izvan radnog vremena!");
+                    return;
+                }
+
+                if (appointmentsService.SaveAppointment(appointment))
                 {
                     MessageBox.Show("Narudžba je uspješno kreirana.");
                     Close();

@@ -1,5 +1,6 @@
 ﻿using Model;
 using Services;
+using Services.Patients;
 using System;
 using System.Windows.Forms;
 
@@ -9,6 +10,8 @@ namespace stomatoloska_ordinacija.Administration.Patients
     {
         private readonly bool IsUpdate = false;
         private Patient Patient { get; set; }
+
+        private readonly PatientsService patientsService = new PatientsService();
 
         public ManagePatient()
         {
@@ -23,7 +26,7 @@ namespace stomatoloska_ordinacija.Administration.Patients
 
             inputDOB.MaxDate = DateTime.Now;
 
-            var patient = DbService.GetInstance().GetPatient(id);
+            var patient = patientsService.GetPatient(id);
 
             Name = "Uredi pacijenta";
             title.Text = $"Uređivanje pacijenta";
@@ -64,9 +67,7 @@ namespace stomatoloska_ordinacija.Administration.Patients
                 Patient.Phone = inputPhone.Text;
                 Patient.Address = inputAddress.Text;
 
-
-                DbService dbService = DbService.GetInstance();
-                if (dbService.SavePatient(Patient))
+                if (patientsService.SavePatient(Patient))
                 {
                     MessageBox.Show("Pacijent je uspješno ažuriran.");
                     Close();
@@ -80,9 +81,8 @@ namespace stomatoloska_ordinacija.Administration.Patients
             else
             {
                 var patient = new Patient(0, inputFirstName.Text.Trim(), inputLastName.Text.Trim(), inputDOB.Value, inputPhone.Text, inputAddress.Text);
-                DbService dbService = DbService.GetInstance();
 
-                if (dbService.SavePatient(patient))
+                if (patientsService.SavePatient(patient))
                 {
                     MessageBox.Show("Pacijent je uspješno kreiran.");
                     Close();

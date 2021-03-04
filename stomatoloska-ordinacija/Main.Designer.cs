@@ -94,18 +94,21 @@ namespace stomatoloska_ordinacija
             this.iskorišteniTerminiPoZahvatuToolStripMenuItem.Name = "iskorišteniTerminiPoZahvatuToolStripMenuItem";
             this.iskorišteniTerminiPoZahvatuToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.iskorišteniTerminiPoZahvatuToolStripMenuItem.Text = "Iskorišteni termini po zahvatu";
+            this.iskorišteniTerminiPoZahvatuToolStripMenuItem.Click += new System.EventHandler(this.iskorišteniTerminiPoZahvatuToolStripMenuItem_Click);
             // 
             // iskorišteniTerminiPoDanimaToolStripMenuItem
             // 
             this.iskorišteniTerminiPoDanimaToolStripMenuItem.Name = "iskorišteniTerminiPoDanimaToolStripMenuItem";
             this.iskorišteniTerminiPoDanimaToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.iskorišteniTerminiPoDanimaToolStripMenuItem.Text = "Iskorišteni termini po danima";
+            this.iskorišteniTerminiPoDanimaToolStripMenuItem.Click += new System.EventHandler(this.iskorišteniTerminiPoDanimaToolStripMenuItem_Click);
             // 
             // neiskorišteniTerminiPoZahvatuToolStripMenuItem
             // 
             this.neiskorišteniTerminiPoZahvatuToolStripMenuItem.Name = "neiskorišteniTerminiPoZahvatuToolStripMenuItem";
             this.neiskorišteniTerminiPoZahvatuToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.neiskorišteniTerminiPoZahvatuToolStripMenuItem.Text = "Neiskorišteni termini po zahvatu";
+            this.neiskorišteniTerminiPoZahvatuToolStripMenuItem.Click += new System.EventHandler(this.neiskorišteniTerminiPoZahvatuToolStripMenuItem_Click);
             // 
             // neiskorištenoVrijemeToolStripMenuItem
             // 
@@ -126,21 +129,21 @@ namespace stomatoloska_ordinacija
             // zahvatiToolStripMenuItem
             // 
             this.zahvatiToolStripMenuItem.Name = "zahvatiToolStripMenuItem";
-            this.zahvatiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zahvatiToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.zahvatiToolStripMenuItem.Text = "Zahvati";
             this.zahvatiToolStripMenuItem.Click += new System.EventHandler(this.zahvatiToolStripMenuItem_Click);
             // 
             // pacijentiToolStripMenuItem
             // 
             this.pacijentiToolStripMenuItem.Name = "pacijentiToolStripMenuItem";
-            this.pacijentiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pacijentiToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.pacijentiToolStripMenuItem.Text = "Pacijenti";
             this.pacijentiToolStripMenuItem.Click += new System.EventHandler(this.pacijentiToolStripMenuItem_Click);
             // 
             // radnoVrijemeToolStripMenuItem
             // 
             this.radnoVrijemeToolStripMenuItem.Name = "radnoVrijemeToolStripMenuItem";
-            this.radnoVrijemeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.radnoVrijemeToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.radnoVrijemeToolStripMenuItem.Text = "Radno vrijeme";
             this.radnoVrijemeToolStripMenuItem.Click += new System.EventHandler(this.radnoVrijemeToolStripMenuItem_Click);
             // 
@@ -160,7 +163,7 @@ namespace stomatoloska_ordinacija
             this.panel1.Controls.Add(this.calendar1);
             this.panel1.Controls.Add(this.monthView1);
             this.panel1.Location = new System.Drawing.Point(16, 78);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1525, 817);
             this.panel1.TabIndex = 4;
@@ -177,7 +180,7 @@ namespace stomatoloska_ordinacija
             this.calendar1.ItemsForeColor = System.Drawing.Color.Black;
             this.calendar1.ItemsTimeFormat = "hh:mm";
             this.calendar1.Location = new System.Drawing.Point(5, 177);
-            this.calendar1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.calendar1.Margin = new System.Windows.Forms.Padding(4);
             this.calendar1.Name = "calendar1";
             this.calendar1.Size = new System.Drawing.Size(1504, 625);
             this.calendar1.TabIndex = 0;
@@ -198,7 +201,7 @@ namespace stomatoloska_ordinacija
             this.monthView1.FirstDayOfWeek = System.DayOfWeek.Monday;
             this.monthView1.ItemPadding = new System.Windows.Forms.Padding(2);
             this.monthView1.Location = new System.Drawing.Point(9, 4);
-            this.monthView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.monthView1.Margin = new System.Windows.Forms.Padding(4);
             this.monthView1.MonthTitleColor = System.Drawing.SystemColors.ActiveCaption;
             this.monthView1.MonthTitleColorInactive = System.Drawing.SystemColors.InactiveCaption;
             this.monthView1.MonthTitleTextColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -221,7 +224,7 @@ namespace stomatoloska_ordinacija
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Main";

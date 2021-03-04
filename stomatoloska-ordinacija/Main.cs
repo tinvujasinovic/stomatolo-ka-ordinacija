@@ -11,6 +11,9 @@ using stomatoloska_ordinacija.App.Appointments;
 using stomatoloska_ordinacija.Administration.Patients;
 using Services.Appointments;
 using Services.WorkHours;
+using stomatoloska_ordinacija.Reports.OperationsByDate;
+using stomatoloska_ordinacija.Reports.UsedByOperation;
+using stomatoloska_ordinacija.Reports.UnusedByOperation;
 
 namespace stomatoloska_ordinacija
 {
@@ -22,6 +25,7 @@ namespace stomatoloska_ordinacija
         private WorkHoursService workHoursService= new WorkHoursService();
 
         private List<CalendarItem> _items = new List<CalendarItem>();
+        private Tuple<DateTime, DateTime> setDates;
 
         public Main()
         {
@@ -31,6 +35,7 @@ namespace stomatoloska_ordinacija
             var dates = GetStartingDates();
 
             calendar1.SetViewRange(dates.Item1, dates.Item2);
+            setDates = new Tuple<DateTime, DateTime>(dates.Item1, dates.Item2);
 
             GetAppointmentsForCalendar(dates.Item1, dates.Item2);
 
@@ -52,6 +57,8 @@ namespace stomatoloska_ordinacija
         {
             calendar1.SetViewRange(monthView1.SelectionStart.Date, monthView1.SelectionEnd.Date);
 
+            setDates = new Tuple<DateTime, DateTime>(monthView1.SelectionStart.Date, monthView1.SelectionEnd.Date);
+
             GetAppointmentsForCalendar(monthView1.SelectionStart.Date, monthView1.SelectionEnd.Date);
         }
 
@@ -61,7 +68,6 @@ namespace stomatoloska_ordinacija
 
             if(item.Tag == null)
             {
-                _items.Remove(item);
                 return;
             }
 
@@ -84,7 +90,9 @@ namespace stomatoloska_ordinacija
         private void narudžbeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form form = new OverviewAppointments();
-            form.Show();
+            form.ShowDialog();
+
+            GetAppointmentsForCalendar(setDates.Item1, setDates.Item2);
         }
 
         private void radnoVrijemeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -102,6 +110,25 @@ namespace stomatoloska_ordinacija
         {
             Form form = new OverviewPatients();
             form.Show();
+        }
+
+        private void iskorišteniTerminiPoZahvatuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form form = new UsedByOperation();
+            form.Show();
+        }
+
+        private void iskorišteniTerminiPoDanimaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form report = new OperationsByDate();
+            report.Show();
+        }
+
+
+        private void neiskorišteniTerminiPoZahvatuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form report = new UnusedByOperation();
+            report.Show();
         }
 
         #endregion
@@ -130,7 +157,6 @@ namespace stomatoloska_ordinacija
 
         private void SetHighlights()
         {
-
             var workHours = workHoursService.GetWorkHours();
 
             if (workHours == null)
@@ -164,8 +190,9 @@ namespace stomatoloska_ordinacija
         private void GetAppointmentsForCalendar(DateTime start, DateTime end)
         {
             _items.Clear();
+            calendar1.Items.Clear();
 
-            var appointments = appointmentsService.GetAllAppointments(start, end);
+            var appointments = appointmentsService.GetAllAppointments(start, end.AddDays(1));
 
             foreach (var appointment in appointments)
             {
@@ -187,5 +214,6 @@ namespace stomatoloska_ordinacija
             }
         }
         #endregion
+
     }
 }

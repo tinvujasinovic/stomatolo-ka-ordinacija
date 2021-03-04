@@ -129,11 +129,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\Forms\OperationsByDate.cs">
+    <Compile Include="Reports\OperationsByDate\OperationsByDate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\Forms\OperationsByDate.Designer.cs">
+    <Compile Include="Reports\OperationsByDate\OperationsByDate.Designer.cs">
       <DependentUpon>OperationsByDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\UnusedByOperation\UnusedByOperation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\UnusedByOperation\UnusedByOperation.Designer.cs">
+      <DependentUpon>UnusedByOperation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\UsedByOperation\UsedByOperation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\UsedByOperation\UsedByOperation.Designer.cs">
+      <DependentUpon>UsedByOperation.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Administration\Patients\ManagePatient.resx">
       <DependentUpon>ManagePatient.cs</DependentUpon>
@@ -169,8 +181,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Reports\Forms\OperationsByDate.resx">
+    <EmbeddedResource Include="Reports\OperationsByDate\OperationsByDate.resx">
       <DependentUpon>OperationsByDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\UnusedByOperation\UnusedByOperation.resx">
+      <DependentUpon>UnusedByOperation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\UsedByOperation\UsedByOperation.resx">
+      <DependentUpon>UsedByOperation.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -182,9 +200,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Content Include="Reports\OperationsByDate.trdp">
+    <None Include="Reports\OperationsByDate\OperationsByDate.trdp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
+    <None Include="Reports\UnusedByOperation\UnusedByOperation.trdp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Reports\UsedByOperation\UsedByOperation.trdp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
