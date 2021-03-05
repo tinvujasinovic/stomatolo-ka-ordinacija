@@ -409,7 +409,7 @@ namespace Services
                 var list = new List<Appointment>();
                 connection.Open();
 
-                var cmd = ExecuteQuery($"SELECT * FROM [dbo].vAppointment");
+                var cmd = ExecuteQuery($"SELECT * FROM [dbo].vAppointment ORDER BY Time");
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
@@ -479,7 +479,7 @@ namespace Services
             }
         }
 
-        public bool CheckAvailability(DateTime start, int duration)
+        public bool CheckAvailability(int id, DateTime start, int duration)
         {
             try
             {
@@ -492,6 +492,7 @@ namespace Services
                 var cmd = ExecuteQuery("CheckAvailabilitySP");
 
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@Id", id));
                 cmd.Parameters.Add(new SqlParameter("@Start", start));
                 cmd.Parameters.Add(new SqlParameter("@End", endTime));
 

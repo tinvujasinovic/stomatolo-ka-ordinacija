@@ -35,9 +35,9 @@ namespace Services.Appointments
             return db.SaveAppointment(appointment);
         }
 
-        public bool CheckAvailability(DateTime start, int duration)
+        public bool CheckAvailability(int id, DateTime start, int duration)
         {
-            return db.CheckAvailability(start, duration);
+            return db.CheckAvailability(id, start, duration);
         }
 
         public bool ChangeAppointmentCompleteFlag(int id, int bitValue)

@@ -59,6 +59,7 @@ namespace stomatoloska_ordinacija.App.Appointments
             title.Text = $"Uređivanje narudžbe";
             IsUpdate = true;
             Appointment = appointment;
+            dateTimePicker1.Value = appointment.Time;
 
             inputOperation.SelectedItem = appointment.Operation;
             inputOperation.SelectedValue = appointment.Operation.Id;
@@ -95,7 +96,7 @@ namespace stomatoloska_ordinacija.App.Appointments
 
             var appointment = new Appointment(dateTimePicker1.Value, patient, operation);
 
-            if (!appointmentsService.CheckAvailability(appointment.Time, operation.Duration.DurationInMinutes))
+            if (!appointmentsService.CheckAvailability(0, appointment.Time, operation.Duration.DurationInMinutes))
             {
                 MessageBox.Show("Odabrani termin je zauzet!");
                 return;
@@ -163,7 +164,7 @@ namespace stomatoloska_ordinacija.App.Appointments
                 Appointment.Patient = patient;
                 Appointment.Operation = operation;
 
-                if (!appointmentsService.CheckAvailability(Appointment.Time, Appointment.Operation.Duration.DurationInMinutes))
+                if (!appointmentsService.CheckAvailability(Appointment.Id, Appointment.Time, Appointment.Operation.Duration.DurationInMinutes))
                 {
                     MessageBox.Show("Odabrani termin je zauzet!");
                     return;
@@ -190,7 +191,7 @@ namespace stomatoloska_ordinacija.App.Appointments
             {
                 var appointment = new Appointment(dateTimePicker1.Value, patient, operation);
 
-                if (!appointmentsService.CheckAvailability(appointment.Time, operation.Duration.DurationInMinutes))
+                if (!appointmentsService.CheckAvailability(0, appointment.Time, operation.Duration.DurationInMinutes))
                 {
                     MessageBox.Show("Odabrani termin je zauzet!");
                     return;

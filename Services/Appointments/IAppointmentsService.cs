@@ -11,7 +11,7 @@ namespace Services.Appointments
         List<Appointment> GetAllAppointments();
         List<Appointment> GetAllAppointments(DateTime start, DateTime end);
         bool DeleteAppointment(int id);
-        bool CheckAvailability(DateTime start, int duration);
+        bool CheckAvailability(int id, DateTime start, int duration);
         bool ChangeAppointmentCompleteFlag(int id, int bitValue);
         bool CheckWorkHours(DateTime start, int duration);
     }
