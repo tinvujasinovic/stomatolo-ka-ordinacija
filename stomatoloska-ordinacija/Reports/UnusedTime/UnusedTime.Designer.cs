@@ -1,7 +1,7 @@
 ﻿
-namespace stomatoloska_ordinacija.Reports.UnusedByOperation
+namespace stomatoloska_ordinacija.Reports.UnusedTime
 {
-    partial class UnusedByOperation
+    partial class UnusedTime
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace stomatoloska_ordinacija.Reports.UnusedByOperation
         /// </summary>
         private void InitializeComponent()
         {
-            Telerik.Reporting.UriReportSource uriReportSource1 = new Telerik.Reporting.UriReportSource();
+            Telerik.Reporting.UriReportSource uriReportSource2 = new Telerik.Reporting.UriReportSource();
             this.reportViewer1 = new Telerik.ReportViewer.WinForms.ReportViewer();
             this.SuspendLayout();
             // 
@@ -38,25 +38,25 @@ namespace stomatoloska_ordinacija.Reports.UnusedByOperation
             this.reportViewer1.AccessibilityKeyMap = null;
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
-            this.reportViewer1.Margin = new System.Windows.Forms.Padding(5);
+            this.reportViewer1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.reportViewer1.Name = "reportViewer1";
-            uriReportSource1.Uri = "C:\\Users\\Tin\\Desktop\\Tin\\Posao\\stomatoloska-ordinacija\\stomatoloska-ordinacija\\Re" +
-    "ports\\UnusedByOperation\\UnusedByOperation.trdp";
-            this.reportViewer1.ReportSource = uriReportSource1;
+            uriReportSource2.Uri = "C:\\Users\\Tin\\Desktop\\Tin\\Posao\\stomatoloska-ordinacija\\stomatoloska-ordinacija\\Re" +
+    "ports\\UnusedTime\\UnusedTime.trdp";
+            this.reportViewer1.ReportSource = uriReportSource2;
             this.reportViewer1.Size = new System.Drawing.Size(1200, 862);
             this.reportViewer1.TabIndex = 0;
             // 
-            // UnusedByOperation
+            // UnusedTime
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 862);
             this.Controls.Add(this.reportViewer1);
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "UnusedByOperation";
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Name = "UnusedTime";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Report Viewer Form";
-            this.Load += new System.EventHandler(this.UnusedByOperation_Load);
+            this.Load += new System.EventHandler(this.ReportViewerForm1_Load);
             this.ResumeLayout(false);
 
         }

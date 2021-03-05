@@ -115,6 +115,7 @@ namespace stomatoloska_ordinacija
             this.neiskorištenoVrijemeToolStripMenuItem.Name = "neiskorištenoVrijemeToolStripMenuItem";
             this.neiskorištenoVrijemeToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.neiskorištenoVrijemeToolStripMenuItem.Text = "Neiskorišteno vrijeme";
+            this.neiskorištenoVrijemeToolStripMenuItem.Click += new System.EventHandler(this.neiskorištenoVrijemeToolStripMenuItem_Click);
             // 
             // administracijToolStripMenuItem
             // 

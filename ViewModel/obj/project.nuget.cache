@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "lC7F0m+9fgs5ymuDMtNfmS93RMgT415xdGUGCOn/0vxKTnWnTLqiD5yZYjc9LgWFmTf81l+ri/FOKnkyCG46LQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Tin\\Desktop\\Tin\\Posao\\stomatoloska-ordinacija\\ViewModel\\ViewModel.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Tin\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Tin\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

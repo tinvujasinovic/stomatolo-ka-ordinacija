@@ -14,6 +14,7 @@ using Services.WorkHours;
 using stomatoloska_ordinacija.Reports.OperationsByDate;
 using stomatoloska_ordinacija.Reports.UsedByOperation;
 using stomatoloska_ordinacija.Reports.UnusedByOperation;
+using stomatoloska_ordinacija.Reports.UnusedTime;
 
 namespace stomatoloska_ordinacija
 {
@@ -128,6 +129,13 @@ namespace stomatoloska_ordinacija
         private void neiskorišteniTerminiPoZahvatuToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form report = new UnusedByOperation();
+            report.Show();
+        }
+
+
+        private void neiskorištenoVrijemeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form report = new UnusedTime();
             report.Show();
         }
 

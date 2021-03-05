@@ -54,6 +54,7 @@ namespace stomatoloska_ordinacija.Reports.OperationsByDate
             this.Controls.Add(this.reportViewer1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "OperationsByDate";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Iskorišteni termini prema datumu";
             this.Load += new System.EventHandler(this.ReportViewerForm1_Load);
             this.ResumeLayout(false);

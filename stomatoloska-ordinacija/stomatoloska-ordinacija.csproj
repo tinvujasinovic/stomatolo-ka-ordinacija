@@ -135,6 +135,12 @@
     <Compile Include="Reports\OperationsByDate\OperationsByDate.Designer.cs">
       <DependentUpon>OperationsByDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\UnusedTime\UnusedTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\UnusedTime\UnusedTime.Designer.cs">
+      <DependentUpon>UnusedTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\UnusedByOperation\UnusedByOperation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -184,6 +190,9 @@
     <EmbeddedResource Include="Reports\OperationsByDate\OperationsByDate.resx">
       <DependentUpon>OperationsByDate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\UnusedTime\UnusedTime.resx">
+      <DependentUpon>UnusedTime.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\UnusedByOperation\UnusedByOperation.resx">
       <DependentUpon>UnusedByOperation.cs</DependentUpon>
     </EmbeddedResource>
@@ -203,6 +212,9 @@
     <None Include="Reports\OperationsByDate\OperationsByDate.trdp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="Reports\UnusedTime\UnusedTime.trdp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Reports\UnusedByOperation\UnusedByOperation.trdp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
