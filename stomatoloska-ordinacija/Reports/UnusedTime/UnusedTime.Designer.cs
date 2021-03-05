@@ -29,7 +29,7 @@ namespace stomatoloska_ordinacija.Reports.UnusedTime
         /// </summary>
         private void InitializeComponent()
         {
-            Telerik.Reporting.UriReportSource uriReportSource2 = new Telerik.Reporting.UriReportSource();
+            Telerik.Reporting.UriReportSource uriReportSource1 = new Telerik.Reporting.UriReportSource();
             this.reportViewer1 = new Telerik.ReportViewer.WinForms.ReportViewer();
             this.SuspendLayout();
             // 
@@ -38,11 +38,11 @@ namespace stomatoloska_ordinacija.Reports.UnusedTime
             this.reportViewer1.AccessibilityKeyMap = null;
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
-            this.reportViewer1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.reportViewer1.Margin = new System.Windows.Forms.Padding(5);
             this.reportViewer1.Name = "reportViewer1";
-            uriReportSource2.Uri = "C:\\Users\\Tin\\Desktop\\Tin\\Posao\\stomatoloska-ordinacija\\stomatoloska-ordinacija\\Re" +
+            uriReportSource1.Uri = "C:\\Users\\Tin\\Desktop\\Tin\\Posao\\stomatoloska-ordinacija\\stomatoloska-ordinacija\\Re" +
     "ports\\UnusedTime\\UnusedTime.trdp";
-            this.reportViewer1.ReportSource = uriReportSource2;
+            this.reportViewer1.ReportSource = uriReportSource1;
             this.reportViewer1.Size = new System.Drawing.Size(1200, 862);
             this.reportViewer1.TabIndex = 0;
             // 
@@ -52,10 +52,10 @@ namespace stomatoloska_ordinacija.Reports.UnusedTime
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 862);
             this.Controls.Add(this.reportViewer1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UnusedTime";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Report Viewer Form";
+            this.Text = "Neiskorišteno vrijeme";
             this.Load += new System.EventHandler(this.ReportViewerForm1_Load);
             this.ResumeLayout(false);
 

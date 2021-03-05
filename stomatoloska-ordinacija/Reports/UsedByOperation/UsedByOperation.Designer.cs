@@ -55,7 +55,7 @@ namespace stomatoloska_ordinacija.Reports.UsedByOperation
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UsedByOperation";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Report Viewer Form";
+            this.Text = "Iskorišteni termini po zahvatu";
             this.Load += new System.EventHandler(this.UsedByOperation_Load);
             this.ResumeLayout(false);
 

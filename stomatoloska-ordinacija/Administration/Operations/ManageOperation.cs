@@ -38,7 +38,7 @@ namespace stomatoloska_ordinacija.Administration.Operations
 
             var operation = operationsService.GetOperation(id);
 
-            Name = "Uredi zahvat";
+            Text = "Uredi zahvat";
             title.Text = $"Uređivanje zahvata";
             IsUpdate = true;
             Operation = operation;

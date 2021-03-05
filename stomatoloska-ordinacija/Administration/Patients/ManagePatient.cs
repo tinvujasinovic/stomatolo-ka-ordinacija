@@ -1,5 +1,4 @@
 ﻿using Model;
-using Services;
 using Services.Patients;
 using System;
 using System.Windows.Forms;
@@ -28,7 +27,7 @@ namespace stomatoloska_ordinacija.Administration.Patients
 
             var patient = patientsService.GetPatient(id);
 
-            Name = "Uredi pacijenta";
+            Text = "Uredi pacijenta";
             title.Text = $"Uređivanje pacijenta";
             IsUpdate = true;
             Patient = patient;

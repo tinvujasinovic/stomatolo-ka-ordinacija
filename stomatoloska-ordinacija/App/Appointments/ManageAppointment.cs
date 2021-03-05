@@ -55,7 +55,7 @@ namespace stomatoloska_ordinacija.App.Appointments
 
             var appointment = appointmentsService.GetAppointment(id);
 
-            Name = "Uredi narudžbu";
+            Text = "Uredi narudžbu";
             title.Text = $"Uređivanje narudžbe";
             IsUpdate = true;
             Appointment = appointment;
